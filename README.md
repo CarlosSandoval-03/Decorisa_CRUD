@@ -18,6 +18,9 @@
 
 ## Diagrama E/R del minimundo
 
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_dark.png#gh-dark-mode-only)
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_light.png#gh-light-mode-only)
+
 ## Modelo Relacional
 
 ## Diccionario de Datos
