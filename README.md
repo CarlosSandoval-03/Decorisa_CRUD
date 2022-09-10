@@ -1,20 +1,23 @@
 # Decorisa_CRUD
 
 - [Decorisa_CRUD](#decorisa_crud)
-  - [Descripcion Minimundo a modelar](#descripcion-minimundo-a-modelar)
+  - [Descripción Minimundo a modelar](#descripción-minimundo-a-modelar)
   - [Diagrama E/R del minimundo](#diagrama-er-del-minimundo)
   - [Modelo Relacional](#modelo-relacional)
   - [Diccionario de Datos](#diccionario-de-datos)
-    - [Tabla Cliente](#tabla-cliente)
-    - [Tabla Asesor](#tabla-asesor)
-    - [Tabla Instalador](#tabla-instalador)
-    - [Tabla Mantenimiento](#tabla-mantenimiento)
-    - [Tabla Sucursal](#tabla-sucursal)
-    - [Tabla Pedido](#tabla-pedido)
-    - [Tabla Productor](#tabla-productor)
-    - [Tabla Producto](#tabla-producto)
+    - [NOMBRE_TABLA](#nombre_tabla)
+    - [Persona](#persona)
+    - [Sucursal](#sucursal)
+    - [Asesor](#asesor)
+    - [Instalador](#instalador)
+    - [Cliente](#cliente)
+    - [Cita](#cita)
+    - [Mantenimiento](#mantenimiento)
+    - [Pedido](#pedido)
 
-## Descripcion Minimundo a modelar
+## Descripción Minimundo a modelar
+
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesentium consequatur esse similique error fugit, delectus, velit impedit maxime sapiente architecto accusamus alias id repellendus deleniti vitae amet reiciendis!
 
 ## Diagrama E/R del minimundo
 
@@ -23,85 +26,95 @@
 
 ## Modelo Relacional
 
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesentium consequatur esse similique error fugit, delectus, velit impedit maxime sapiente architecto accusamus alias id repellendus deleniti vitae amet reiciendis!
+
 ## Diccionario de Datos
 
-### Tabla Cliente
+### NOMBRE_TABLA
 
-| Columna       | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Cli_Documento | Si  |     |      |      |                |             |
-| Cli_Nombre    |     |     |      |      |                |             |
-| Cli_Apellido  |     |     |      |      |                |             |
-| Cli_Direccion |     |     |      |      |                |             |
-| Cli_Telefono  |     |     |      |      |                |             |
-| Cli_Correo    |     |     |      |      |                |             |
+Descripción:
 
-### Tabla Asesor
+| Columna | PK  | FK  | Nulo | Tipo | Predeterminado | Descripción |
+| ------- | --- | --- | ---- | ---- | -------------- | ----------- |
+| a       | Si  |     |      |      |                |             |
 
-| Columna        | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| -------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Ase_Documento  | Si  |     |      |      |                |             |
-| Ase_Nombre     |     |     |      |      |                |             |
-| Ase_Apellido   |     |     |      |      |                |             |
-| Ase_Ventas_Mes |     |     |      |      |                |             |
-| Suc_Direccion  |     | Si  |      |      |                |             |
+### Persona
 
-### Tabla Instalador
+Descripción: Representa la información general de todas las personas almacenadas en la base de datos
 
-| Columna          | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ---------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Ins_Documento    |     |     |      |      |                |             |
-| Ins_Nombre       |     |     |      |      |                |             |
-| Ins_Apellido     |     |     |      |      |                |             |
-| Ins_Especialidad |     |     |      |      |                |             |
-| Ins_Tarifa       |     |     |      |      |                |             |
+| Columna            | PK  | FK  | Nulo | Tipo         | Predeterminado | Descripción                                                 |
+| ------------------ | --- | --- | ---- | ------------ | -------------- | ----------------------------------------------------------- |
+| Per_Documento      | Si  | No  | No   | INT          |                | Identificador único de una persona natural en Colombia      |
+| Per_NombreCompleto | No  | No  | No   | VARCHAR(100) |                | Nombre legal de la persona                                  |
+| Per_Dirección      | No  | No  | No   | VARCHAR(45)  |                | Información respecto a la ubicación donde la persona reside |
 
-### Tabla Mantenimiento
+### Sucursal
 
-| Columna                   | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ------------------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Id_Mant                   | Si  |     |      |      |                |             |
-| Mant_Tipo                 |     |     |      |      |                |             |
-| Mant_Producto_Reparar     |     |     |      |      |                |             |
-| Mant_Fallas_Identificadas |     |     |      |      |                |             |
-| Cli_Documento             |     | Si  |      |      |                |             |
-| Suc_Direccion             |     | Si  |      |      |                |             |
+Descripción: Administración de sucursales para manejo de personal y pedidos
 
-### Tabla Sucursal
+| Columna       | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                              |
+| ------------- | --- | --- | ---- | ----------- | -------------- | -------------------------------------------------------- |
+| Suc_Dirección | Si  | No  | No   | VARCHAR(45) |                | Identificador que representa la ubicación de la sucursal |
+| Suc_Nombre    | No  | No  | No   | VARCHAR(45) |                |                                                          |
 
-| Columna       | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Suc_Direccion | Si  |     |      |      |                |             |
-| Suc_Nombre    |     |     |      |      |                |             |
+### Asesor
 
-### Tabla Pedido
+Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una relación con la sucursales y atributos respecto a un conteo sobre sus ventas
 
-| Columna           | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ----------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Id_Ped            | Si  |     |      |      |                |             |
-| Ped_Metodo        |     |     |      |      |                |             |
-| Ped_Empresa_Envio |     |     |      |      |                |             |
-| Ped_Fecha_Envio   |     |     |      |      |                |             |
-| Ped_Fecha_Entrega |     |     |      |      |                |             |
-| Suc_Direccion     |     | Si  |      |      |                |             |
-| Nombre_Pro        |     | Si  |      |      |                |             |
+| Columna       | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                               |
+| ------------- | --- | --- | ---- | ----------- | -------------- | ----------------------------------------------------------------------------------------- |
+| Per_Documento | Si  | Si  | No   | INT         |                | Llave foránea que representa la relación entre un asesor y su representación como persona |
+| Suc_Dirección | Si  | Si  | No   | VARCHAR(45) |                | Identificador único de la sucursal, que permite reconocer el lugar de trabajo del asesor  |
+| Ase_VentasMes | No  | No  | Si   | INT         | 0              | Registro de las ventas realizadas por un asesor                                           |
 
-### Tabla Productor
+### Instalador
 
-| Columna           | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| ----------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Nombre_Pro        |     |     |      |      |                |             |
-| Pro_Telefono      |     |     |      |      |                |             |
-| Pro_Tipo_Producto |     |     |      |      |                |             |
-| Pro_Compras_Mes   |     |     |      |      |                |             |
+Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una especialidad y tarifa
 
-### Tabla Producto
+| Columna          | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                                   |
+| ---------------- | --- | --- | ---- | ----------- | -------------- | --------------------------------------------------------------------------------------------- |
+| Per_Documento    | Si  | Si  | No   | INT         |                | Llave foránea que representa la relación entre un instalador y su representación como persona |
+| Ins_Especialidad | No  | No  | No   | VARCHAR(45) |                | Representa el servicio que puede brindar                                                      |
+| Ins_Tarifa       | No  | No  | No   | INT         |                | Representa costo por el servicio                                                              |
 
-| Columna               | PK  | FK  | Nulo | Tipo | Predeterminado | Descripcion |
-| --------------------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| Produc_Nombre         | Si  |     |      |      |                |             |
-| Produc_Alto           |     |     |      |      |                |             |
-| Produc_Ancho          |     |     |      |      |                |             |
-| Produc_Precio         |     |     |      |      |                |             |
-| Produc_Funcionamiento |     |     |      |      |                |             |
-| Produc_Foto           |     |     |      |      |                |             |
+### Cliente
+
+Descripción: Representa la entidad débil respecto a "Persona", donde se permite su relación con una cita, venta o servicio de mantenimiento
+
+| Columna            | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                                |
+| ------------------ | --- | --- | ---- | ----------- | -------------- | ------------------------------------------------------------------------------------------ |
+| Per_Documento      | Si  | Si  | No   | INT         |                | Llave foránea que representa la relación entre un cliente y su representación como persona |
+| cli_NumeroContacto | No  | No  | No   | INT         |                | Representación de el número para contactar al cliente                                      |
+| cli_Correo         | No  | No  | Si   | VARCHAR(50) |                | Representación de el correo de contacto                                                    |
+
+### Cita
+
+Descripción: Representa un encuentro entre un asesor y un cliente, es débil respecto a las entidades mencionadas
+
+| Columna           | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                    |
+| ----------------- | --- | --- | ---- | ----------- | -------------- | -------------------------------------------------------------- |
+| Ase_Per_Documento | Si  | Si  | No   | INT         |                | Identificador único del asesor                                 |
+| Cli_Per_Documento | Si  | Si  | No   | INT         |                | Identificador único del cliente                                |
+| Cit_Fecha         | Si  | No  | No   | DATETIME    |                | Representa la fecha donde se llevara a cabo el encuentro       |
+| Cit_Dirección     | No  | No  | No   | VARCHAR(45) |                | Representa el lugar de encuentro donde se lleva a cabo la cita |
+
+### Mantenimiento
+
+Descripción: Representa los servicios de mantenimiento prestados
+
+| Columna             | PK  | FK  | Nulo | Tipo         | Predeterminado | Descripción                                                    |
+| ------------------- | --- | --- | ---- | ------------ | -------------- | -------------------------------------------------------------- |
+| Man_Id              | Si  | No  | No   | INT          |                | Identificador único del servicio                               |
+| Cli_Per_Documento   | Si  | No  | No   | INT          |                | Identificador único del cliente                                |
+| Suc_Dirección       | Si  | No  | No   | VARCHAR(45)  |                | Identificador único de la sucursal                             |
+| Man_ProductoReparar | No  | No  | No   | VARCHAR(45)  |                | Representación del producto sobre el que se aplica el servicio |
+| Man_Tipo            | No  | No  | No   | VARCHAR(45)  |                | Tipo del mantenimiento aplicado                                |
+| Man_Fallas          | No  | No  | Si   | VARCHAR(300) |                | Representación de las fallas encontradas en el servicio        |
+
+### Pedido
+
+Descripción:
+
+| Columna | PK  | FK  | Nulo | Tipo | Predeterminado | Descripción |
+| ------- | --- | --- | ---- | ---- | -------------- | ----------- |
+|         |     |     |      |      |                |             |
