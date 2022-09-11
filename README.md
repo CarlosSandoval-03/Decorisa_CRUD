@@ -48,7 +48,7 @@ Tras esta descripción se notan una gran cantidad de datos que podrían ser regi
 
 ## Diagrama E/R del minimundo
 
-![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_dark.png)
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er.png)
 
 ## Modelo Relacional
 
