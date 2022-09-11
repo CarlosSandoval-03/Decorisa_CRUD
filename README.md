@@ -20,12 +20,35 @@
 
 ## Descripción Minimundo a modelar
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesentium consequatur esse similique error fugit, delectus, velit impedit maxime sapiente architecto accusamus alias id repellendus deleniti vitae amet reiciendis!
+La empresa va dirigida a la venta y mantenimiento de productos para la decoración como lo son: cortinas y pisos. En cada uno de estos servicios se tiene un proceso donde se involucra a los productores, los clientes y la empresa que sirve como intermediaria.
+
+- **Venta de Cortinas:** Para la venta de cortinas el primer paso es la asesoría al cliente quien llega en busca de una cortina adecuada para decorar su espacio, en esa asesoría se le dan las diferentes opciones de materiales y de tipos de cortinas disponibles. Paralelo a esto se hace una toma de medidas donde regularmente se visita la vivienda del cliente (a menos que el cliente ya tenga las medidas). Tras terminar estos procesos se le hace una cotización al cliente, en caso de proceder con la venta, el cliente debe realizar un abono inicial (generalmente del 50%) y se envía el pedido a la empresa que se encarga de producirla, en caso de que la opción elegida pueda ser producida por nosotros se compran los materiales para confeccionar (ejemplo; cortinas romanas, o velos tradicionales). Con el pedido ya solicitado se espera unos días mientras es producido y enviado, tras esto se habla con el cliente para concertar una cita donde un instalador de confianza ejecuta la instalación del producto, finalmente se hace la entrega de las cortinas y se recibe el saldo final.
+
+- **Venta de Pisos:** Al igual que en anterior, el primer paso es la asesoría al cliente, quien escoge el color y tipo de piso que quiere, se toman las medidas, con las medidas y el producto, se efectúa la cotización, en caso de efectuar la venta: se recibe un adelanto y se efectúa el pedido a la empresa correspondiente, se recoge el piso generalmente el mismo día. Ya con el piso listo, se agenda una cita con el cliente para la instalación. Ya instalado el piso se recibe el saldo faltante.
+
+- **Mantenimiento de cortinas:** Las cortinas suelen tener una vida útil aproximada de entre 5 a 7 años dependiendo del cuidado que se les dé, entre estos cuidados se encuentran los mantenimientos preventivos, estos son efectuados de manera anual o bianual, en el proceso se restauran partes mecánicas importantes en el funcionamiento de la cortina, lavado que retire el polvo y la suciedad acumulados. El objetivo de los mantenimientos es primero dar un mejor aspecto a la cortina, segundo cuidar la tela, ya que si se acumula el polvo sumado a la luz del sol, la tela se cristaliza reduciendo la vida útil de la cortina. El proceso de este mantenimiento es más corto, puesto que generalmente el cliente es quien llega buscando el servicio, sé realiza una visita, se dan los precios del mantenimiento, incluyendo posibles cambios de partes mecánicas, se retiran las cortinas, se llevan al local, si el proceso puede ser realizado por la empresa, se hace, en caso contrario o si es necesario el lavado, se lleva a una empresa especializada en lavado ultrasónico. Cuando las cortinas están listas, se agenda una cita para la instalación.
+
+Tras esta descripción se notan una gran cantidad de datos que podrían ser registrados con el fin de mejorar la empresa:
+
+- La empresa suele manejar clientes sobre los cuales se pierde el contacto, para evitar este tipo de situaciones se piensa registrar los datos relacionados con las ventas como:
+  - Datos de contacto de los clientes
+  - Fechas de venta, esto con el fin de ofrecer servicio de mantenimiento a los clientes
+- De igual manera se suele trabajar con otras empresas, por ende también se almacenarán los datos de:
+  - Inventario
+  - Registros contables
+  - Facturación
+- Para ofrecer un mejor catálogo al cliente, los productos en venta:
+  - Tipo de funcionamiento
+  - Tipo de material
+  - Precio
+  - Foto del producto
+- Respecto a la atención, el manejo de:
+  -Registro de citas
+  -Estado del producto (estado del envío)
 
 ## Diagrama E/R del minimundo
 
-![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_dark.png#gh-dark-mode-only)
-![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_light.png#gh-light-mode-only)
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_dark.png)
 
 ## Modelo Relacional
 
