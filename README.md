@@ -5,7 +5,6 @@
   - [Diagrama E/R del minimundo](#diagrama-er-del-minimundo)
   - [Modelo Relacional](#modelo-relacional)
   - [Diccionario de Datos](#diccionario-de-datos)
-    - [NOMBRE_TABLA](#nombre_tabla)
     - [Persona](#persona)
     - [Sucursal](#sucursal)
     - [Asesor](#asesor)
@@ -14,6 +13,10 @@
     - [Cita](#cita)
     - [Mantenimiento](#mantenimiento)
     - [Pedido](#pedido)
+    - [Productor](#productor)
+    - [Producto](#producto)
+    - [Venta](#venta)
+    - [Venta_Incluye_Producto](#venta_incluye_producto)
 
 ## Descripción Minimundo a modelar
 
@@ -30,17 +33,9 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesenti
 
 ## Diccionario de Datos
 
-### NOMBRE_TABLA
-
-Descripción:
-
-| Columna | PK  | FK  | Nulo | Tipo | Predeterminado | Descripción |
-| ------- | --- | --- | ---- | ---- | -------------- | ----------- |
-| a       | Si  |     |      |      |                |             |
-
 ### Persona
 
-Descripción: Representa la información general de todas las personas almacenadas en la base de datos
+Descripción: Representa la información general de todas las personas almacenadas en la base de datos.
 
 | Columna            | PK  | FK  | Nulo | Tipo         | Predeterminado | Descripción                                                 |
 | ------------------ | --- | --- | ---- | ------------ | -------------- | ----------------------------------------------------------- |
@@ -50,7 +45,7 @@ Descripción: Representa la información general de todas las personas almacenad
 
 ### Sucursal
 
-Descripción: Administración de sucursales para manejo de personal y pedidos
+Descripción: Administración de sucursales para manejo de personal y pedidos.
 
 | Columna       | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                              |
 | ------------- | --- | --- | ---- | ----------- | -------------- | -------------------------------------------------------- |
@@ -59,7 +54,7 @@ Descripción: Administración de sucursales para manejo de personal y pedidos
 
 ### Asesor
 
-Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una relación con la sucursales y atributos respecto a un conteo sobre sus ventas
+Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una relación con la sucursales y atributos respecto a un conteo sobre sus ventas.
 
 | Columna       | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                               |
 | ------------- | --- | --- | ---- | ----------- | -------------- | ----------------------------------------------------------------------------------------- |
@@ -69,7 +64,7 @@ Descripción: Representa la entidad débil respecto a "Persona" donde adquiere u
 
 ### Instalador
 
-Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una especialidad y tarifa
+Descripción: Representa la entidad débil respecto a "Persona" donde adquiere una especialidad y tarifa.
 
 | Columna          | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                                   |
 | ---------------- | --- | --- | ---- | ----------- | -------------- | --------------------------------------------------------------------------------------------- |
@@ -79,7 +74,7 @@ Descripción: Representa la entidad débil respecto a "Persona" donde adquiere u
 
 ### Cliente
 
-Descripción: Representa la entidad débil respecto a "Persona", donde se permite su relación con una cita, venta o servicio de mantenimiento
+Descripción: Representa la entidad débil respecto a "Persona", donde se permite su relación con una cita, venta o servicio de mantenimiento.
 
 | Columna            | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                                |
 | ------------------ | --- | --- | ---- | ----------- | -------------- | ------------------------------------------------------------------------------------------ |
@@ -89,7 +84,7 @@ Descripción: Representa la entidad débil respecto a "Persona", donde se permit
 
 ### Cita
 
-Descripción: Representa un encuentro entre un asesor y un cliente, es débil respecto a las entidades mencionadas
+Descripción: Representa un encuentro entre un asesor y un cliente, es débil respecto a las entidades mencionadas.
 
 | Columna           | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                    |
 | ----------------- | --- | --- | ---- | ----------- | -------------- | -------------------------------------------------------------- |
@@ -100,7 +95,7 @@ Descripción: Representa un encuentro entre un asesor y un cliente, es débil re
 
 ### Mantenimiento
 
-Descripción: Representa los servicios de mantenimiento prestados
+Descripción: Representa los servicios de mantenimiento prestados.
 
 | Columna             | PK  | FK  | Nulo | Tipo         | Predeterminado | Descripción                                                    |
 | ------------------- | --- | --- | ---- | ------------ | -------------- | -------------------------------------------------------------- |
@@ -113,8 +108,63 @@ Descripción: Representa los servicios de mantenimiento prestados
 
 ### Pedido
 
-Descripción:
+Descripción: Representa los pedidos que hace la empresa a diferentes productores, tiene relación con las diferentes sucursales.
 
-| Columna | PK  | FK  | Nulo | Tipo | Predeterminado | Descripción |
-| ------- | --- | --- | ---- | ---- | -------------- | ----------- |
-|         |     |     |      |      |                |             |
+| Columna           | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                       |
+| ----------------- | --- | --- | ---- | ----------- | -------------- | --------------------------------------------------------------------------------- |
+| Id_Ped            | Si  | No  | No   | INT         |                | Representa la llave primaria de la entidad Pedido de tipo numérico                |
+| Ped_Método        | No  | No  | No   | VARCHAR(45) |                | Método que se empleara para realizar el envió                                     |
+| Pro_nombre        | No  | Si  | No   | VARCHAR(45) |                | Indica el nombre del productor que enviara                                        |
+| Ped_Fecha_Envió   | No  | No  | No   | DATETIME    |                | Representa la fecha en que se enviara                                             |
+| Ped_Fecha_Entrega | No  | No  | No   | DATETIME    |                | Representa la fecha estimada de entrega                                           |
+| Suc_Dirección     | No  | Si  | No   | VARCHAR(45) |                | Identificador único de la sucursal, que permite reconocer el lugar donde llegara  |
+| Ven_Id            | No  | Si  | No   | INT         |                | Identificador único de la venta, que permite identificar los productos requeridos |
+
+### Productor
+
+Descripción: Representa la información que requiere la empresa sobre los productores con los que trata, donde adquiere una relación con los pedidos y los productos.
+
+| Columna           | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                            |
+| ----------------- | --- | --- | ---- | ----------- | -------------- | ------------------------------------------------------ |
+| Nombre_Pro        | Si  | No  | No   | VARCHAR(45) |                | Identificador único del productor por medio del nombre |
+| Pro_Teléfono      | No  | No  | No   | INT         |                | Representación del medio de contacto con el productor  |
+| Pro_Tipo_Producto | No  | No  | No   | VARCHAR(45) |                | Representa la clase del producto que ofrece            |
+| Pro_Compras_Mes   | No  | No  | No   | INT         | 0              | Registro de compras realizadas a el productor          |
+
+### Producto
+
+Descripción: Representa las especificaciones de los productos ofrecidos y tiene relación con los productores y las ventas.
+
+| Columna                | PK  | FK  | Nulo | Tipo         | Predeterminado | Descripción                                                                                     |
+| ---------------------- | --- | --- | ---- | ------------ | -------------- | ----------------------------------------------------------------------------------------------- |
+| Product_nombre         | Si  | No  | No   | VARCHAR(45)  |                | Identificador único del producto por medio del nombre                                           |
+| Pro_nombre             | Si  | Si  | No   | VARCHAR(45)  |                | Llave foránea que representa la relación entre el productor y el producto ofrecido por el mismo |
+| Product_Precio         | No  | No  | No   | INT          |                | Representa el valor o costo                                                                     |
+| Product_Funcionamiento | No  | No  | No   | VARCHAR(300) |                | Especifica el como funciona                                                                     |
+| Product_Foto           | No  | No  | No   | LONGBLOB     |                | Representación de manera gráfica o vista previa                                                 |
+
+### Venta
+
+Descripción: Representa todas las transacciones entre Cliente y Asesor, se relaciona con el instalador y el producto además de las entidades Cliente y Asesor.
+
+| Columna       | PK  | FK  | Nulo | Tipo     | Predeterminado | Descripción                                                                 |
+| ------------- | --- | --- | ---- | -------- | -------------- | --------------------------------------------------------------------------- |
+| Id_Venta      | Si  | No  | No   | INT      |                | Representa la llave primaria de la entidad Venta de tipo numérico           |
+| Cli_Documento | No  | Si  | No   | INT      |                | Identificador único del cliente                                             |
+| Ase_Documento | No  | Si  | No   | INT      |                | Identificador único del asesor                                              |
+| Id_Pedido     | No  | Si  | No   | INT      |                | Identificador único del pedido, que permite identificar la fecha de entrega |
+| Fecha         | No  | No  | No   | DATETIME |                | Fecha del dia Representa la fecha cuando se cerro la negociación            |
+| Ins_Documento | No  | Si  | No   | INT      |                | Identificador único del instalador                                          |
+
+### Venta_Incluye_Producto
+
+Descripción: Representa las especificaciones de los productos que puede tener una venta.
+
+| Columna        | PK  | FK  | Nulo | Tipo        | Predeterminado | Descripción                                                                           |
+| -------------- | --- | --- | ---- | ----------- | -------------- | ------------------------------------------------------------------------------------- |
+| Id_Venta       | Si  | Si  | No   | INT         |                | Llave foránea que representa la relación de la venta con los productos                |
+| Product_nombre | Si  | Si  | No   | VARCHAR(45) |                | Llave foránea que representa la relación entre la venta de productos con el productor |
+| Pro_nombre     | Si  | Si  | No   | VARCHAR(45) |                | Llave foránea que representa la relación de los productos con la venta                |
+| Vip_Prod_Ancho | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
+| Vid_Prod_Alto  | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
+| Cantidad       | No  | No  | No   | INT         | 1              | Representa el numero de productos requeridos con las especificaciones dadas           |
