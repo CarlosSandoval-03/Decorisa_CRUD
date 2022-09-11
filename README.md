@@ -20,7 +20,7 @@
 
 ## Descripción Minimundo a modelar
 
-![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo-relacional.png)
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesentium consequatur esse similique error fugit, delectus, velit impedit maxime sapiente architecto accusamus alias id repellendus deleniti vitae amet reiciendis!
 
 ## Diagrama E/R del minimundo
 
@@ -29,7 +29,7 @@
 
 ## Modelo Relacional
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci eius praesentium consequatur esse similique error fugit, delectus, velit impedit maxime sapiente architecto accusamus alias id repellendus deleniti vitae amet reiciendis!
+![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo-relacional.png)
 
 ## Diccionario de Datos
 
