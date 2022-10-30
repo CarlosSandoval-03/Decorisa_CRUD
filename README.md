@@ -18,6 +18,7 @@
     - [Venta](#venta)
     - [Venta_Incluye_Producto](#venta_incluye_producto)
   - [Matriz Perfiles](#matriz-perfiles)
+  - [Consultas AR](#consultas-ar)
 
 ## Descripción Minimundo a modelar
 
@@ -190,7 +191,7 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 | Product_nombre | Si  | Si  | No   | VARCHAR(45) |                | Llave foránea que representa la relación entre la venta de productos con el productor |
 | Pro_nombre     | Si  | Si  | No   | VARCHAR(45) |                | Llave foránea que representa la relación de los productos con la venta                |
 | Vip_Prod_Ancho | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
-| Vid_Prod_Alto  | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
+| Vid_Prod_Alto  | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas `para el producto              |
 | Cantidad       | No  | No  | No   | INT         | 1              | Representa el numero de productos requeridos con las especificaciones dadas           |
 
 ## Matriz Perfiles
@@ -201,3 +202,26 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 - D: Eliminar
 
 ![matriz perfiles](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/img/matriz_perfiles.jpg)
+
+## Consultas AR
+
+- 1. Ganancias en bruto por producto
+     ![γ product_nombre;SUM(product_precio * cantidad) → Ganancia (producto ⨝(product_nombre, pro_nombre) venta_incluye_producto)](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/1.png "γ product_nombre;SUM(product_precio * cantidad) → Ganancia (producto ⨝(product_nombre, pro_nombre) venta_incluye_producto)")
+- 2. Comisión por asesor
+     ![γ asesor.per_documento; (SUM(product_precio * cantidad) * (@PORCENTAJE_COMISION / 100)) → Comision (asesor ⨝(asesor.per_documento=venta.ase_documento) venta ⨝(venta.ven_id=venta_incluye_producto.ven_id) venta_incluye_producto ⨝(venta_incluye_producto.product_nombre=producto.product_nombre) producto)](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/2.png "γ asesor.per_documento; (SUM(product_precio * cantidad) * (@PORCENTAJE_COMISION / 100)) → Comision (asesor ⨝(asesor.per_documento=venta.ase_documento) venta ⨝(venta.ven_id=venta_incluye_producto.ven_id) venta_incluye_producto ⨝(venta_incluye_producto.product_nombre=producto.product_nombre) producto)")
+- 3. Productos entre intervalo precio
+     ![τ product_precio ASC (σ product_precio <= @MAX_PRECIO AND product_precio >= @MIN_PRECIO) ](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/3.png "τ product_precio ASC (σ product_precio <= @MAX_PRECIO AND product_precio >= @MIN_PRECIO) ")
+- 4. Citas pendientes por asesor
+     ![γ ase_per_documento ; COUNT(cit_fecha) → Citas_Pendientes (σ cit_fecha >= CURDATE() (cita))](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/4.png "γ ase_per_documento ; COUNT(cit_fecha) → Citas_Pendientes (σ cit_fecha >= CURDATE() (cita))")
+- 5. Numero ganancias por instalador por mes
+     ![γ instalador.per_documento ; AVG(ins_tarifa) → Promedio_Ganancia (instalador ⨝ (per_documento=ins_documento) venta)](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/5.png "γ instalador.per_documento ; AVG(ins_tarifa) → Promedio_Ganancia (instalador ⨝ (per_documento=ins_documento) venta)")
+- 6. Numero de pedidos hechos a cada proveedor en el mes de Agosto
+     ![γ PRODUCTOR.pro_nombreEmpresa ; COUNT(ped_id) → Num_pedidos (σ VENTA.ven_fecha like "%-08-%" (PRODUCTOR ⨝ PEDIDO ⨝ VENTA))](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/6.png)
+- 7. Los productos mas vendidos
+     ![τ Num_pedidos ASC (γ PRODUCTOR.pro_nombreEmpresa ; COUNT(ped_id) → Num_pedidos (VENTA_INCLUYE_PRODUCTO))](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/7.png "τ Num_pedidos ASC (γ PRODUCTOR.pro_nombreEmpresa ; COUNT(ped_id) → Num_pedidos (VENTA_INCLUYE_PRODUCTO))")
+- 8. Citas programadas para cierto dia
+     ![π cli_nombreCompleto, ase_nombreCompleto, cit_fecha (σ cit_fecha like '2022-08-11%' (CITA join CLIENTE join ASESOR))](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/8.png "π cli_nombreCompleto, ase_nombreCompleto, cit_fecha (σ cit_fecha like '2022-08-11%' (CITA join CLIENTE join ASESOR))")
+- 9. Promedio de envió de un pedido
+     ![γ AVG(Periodo_entrega) → Prom_Periodo_entrega (π DATEDIFF(ped_fechaEntrega, ped_fechaEnvio) → Periodo_entrega) → PEDIDO](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/9.png "γ AVG(Periodo_entrega) → Prom_Periodo_entrega (π DATEDIFF(ped_fechaEntrega, ped_fechaEnvio) → Periodo_entrega) → PEDIDO")
+- 10. Clientes mas frecuentes en compras
+      ![γ cli_nombreCompleto ; COUNT(ven_id) → Num_compras (CLIENTE join VENTA)](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/10.png "γ cli_nombreCompleto ; COUNT(ven_id) → Num_compras (CLIENTE join VENTA)")
