@@ -17,6 +17,7 @@
     - [Producto](#producto)
     - [Venta](#venta)
     - [Venta_Incluye_Producto](#venta_incluye_producto)
+  - [Matriz Perfiles](#matriz-perfiles)
 
 ## Descripción Minimundo a modelar
 
@@ -48,11 +49,11 @@ Tras esta descripción se notan una gran cantidad de datos que podrían ser regi
 
 ## Diagrama E/R del minimundo
 
-![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er.png)
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/ProyectoDiagramaAR.png)
 
 ## Modelo Relacional
 
-![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo-relacional.png)
+![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelRelacionalProyecto.png)
 
 ## Diccionario de Datos
 
@@ -191,3 +192,16 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 | Vip_Prod_Ancho | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
 | Vid_Prod_Alto  | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
 | Cantidad       | No  | No  | No   | INT         | 1              | Representa el numero de productos requeridos con las especificaciones dadas           |
+
+## Matriz Perfiles
+
+- C: Crear
+- R: Leer
+- U: Actualizar
+- D: Eliminar
+
+|               | Cliente | Instalador | Sucursal | Asesor | Productor | Venta | Pedido | Producto | Mantenimiento | Cita | Venta incluye producto | Ventas Ganancias Brutas | Ganancias netas | Pedidos Pendientes | Info Asesor | Ase_numeroVentas |
+| ------------- | ------- | ---------- | -------- | ------ | --------- | ----- | ------ | -------- | ------------- | ---- | ---------------------- | ----------------------- | --------------- | ------------------ | ----------- | ---------------- |
+| ADMINISTRADOR | CRUD    | CRUD       | CRUD     | CRUD   | CRUD      | CRUD  | CRUD   | CRUD     | CRUD          | CRUD | CRUD                   | CRUD                    | CRUD            | CRUD               | CRUD        | CRUD             |
+| ASESOR        | CRU     | R          | R        | \-     | R         | CR    | CRU    | CR       | CRU           | CRUD | CRU                    | \-                      | \-              | RU                 | R           | \-               |
+| CLIENTE       | \-      | \-         | R        | \-     | \-        | \-    | \-     | R        | \-            | \-   | \-                     | \-                      | \-              | \-                 | \-          | \-               |
