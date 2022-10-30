@@ -200,4 +200,4 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 - U: Actualizar
 - D: Eliminar
 
-![matriz perfiles](src/img/matriz_perfiles.jpg)
+![matriz perfiles](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/img/matriz_perfiles.jpg)
