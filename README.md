@@ -48,11 +48,11 @@ Tras esta descripción se notan una gran cantidad de datos que podrían ser regi
 
 ## Diagrama E/R del minimundo
 
-![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo_er_dark.png)
+![Diagrama ER](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/Proyecto.drawio (1).png
 
 ## Modelo Relacional
 
-![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelo-relacional.png)
+![Diagrama R](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/develop/src/img/modelRelacionalProyecto.png)
 
 ## Diccionario de Datos
 
