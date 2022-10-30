@@ -17,6 +17,7 @@
     - [Producto](#producto)
     - [Venta](#venta)
     - [Venta_Incluye_Producto](#venta_incluye_producto)
+  - [Matriz Perfiles](#matriz-perfiles)
 
 ## Descripción Minimundo a modelar
 
@@ -191,3 +192,16 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 | Vip_Prod_Ancho | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
 | Vid_Prod_Alto  | Si  | No  | No   | INT         |                | Identificador único de las especificaciones requeridas para el producto               |
 | Cantidad       | No  | No  | No   | INT         | 1              | Representa el numero de productos requeridos con las especificaciones dadas           |
+
+## Matriz Perfiles
+
+- C: Crear
+- R: Leer
+- U: Actualizar
+- D: Eliminar
+
+|               | Cliente | Instalador | Sucursal | Asesor | Productor | Venta | Pedido | Producto | Mantenimiento | Cita | Venta incluye producto | Ventas Ganancias Brutas | Ganancias netas | Pedidos Pendientes | Info Asesor | Ase_numeroVentas |
+| ------------- | ------- | ---------- | -------- | ------ | --------- | ----- | ------ | -------- | ------------- | ---- | ---------------------- | ----------------------- | --------------- | ------------------ | ----------- | ---------------- |
+| ADMINISTRADOR | CRUD    | CRUD       | CRUD     | CRUD   | CRUD      | CRUD  | CRUD   | CRUD     | CRUD          | CRUD | CRUD                   | CRUD                    | CRUD            | CRUD               | CRUD        | CRUD             |
+| ASESOR        | CRU     | R          | R        | \-     | R         | CR    | CRU    | CR       | CRU           | CRUD | CRU                    | \-                      | \-              | RU                 | R           | \-               |
+| CLIENTE       | \-      | \-         | R        | \-     | \-        | \-    | \-     | R        | \-            | \-   | \-                     | \-                      | \-              | \-                 | \-          | \-               |
