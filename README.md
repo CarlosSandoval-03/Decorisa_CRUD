@@ -200,8 +200,4 @@ Descripción: Representa las especificaciones de los productos que puede tener u
 - U: Actualizar
 - D: Eliminar
 
-|               | Cliente | Instalador | Sucursal | Asesor | Productor | Venta | Pedido | Producto | Mantenimiento | Cita | Venta incluye producto | Ventas Ganancias Brutas | Ganancias netas | Pedidos Pendientes | Info Asesor | Ase_numeroVentas |
-| ------------- | ------- | ---------- | -------- | ------ | --------- | ----- | ------ | -------- | ------------- | ---- | ---------------------- | ----------------------- | --------------- | ------------------ | ----------- | ---------------- |
-| ADMINISTRADOR | CRUD    | CRUD       | CRUD     | CRUD   | CRUD      | CRUD  | CRUD   | CRUD     | CRUD          | CRUD | CRUD                   | CRUD                    | CRUD            | CRUD               | CRUD        | CRUD             |
-| ASESOR        | CRU     | R          | R        | \-     | R         | CR    | CRU    | CR       | CRU           | CRUD | CRU                    | \-                      | \-              | RU                 | R           | \-               |
-| CLIENTE       | \-      | \-         | R        | \-     | \-        | \-    | \-     | R        | \-            | \-   | \-                     | \-                      | \-              | \-                 | \-          | \-               |
+![matriz perfiles](src/img/matriz_perfiles.jpg)
