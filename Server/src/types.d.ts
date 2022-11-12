@@ -1,9 +1,7 @@
 // Sucursal
-export type OfficeAddress = 'Cr17 #161-31' | 'Cr35a #57 91' | 'Cr51 #134-14'
-
 export interface Office {
-  officeAddress: OfficeAddress
-  officeName: string
+  suc_direccion: string
+  suc_nombre: string
 }
 
 // Persona
@@ -22,7 +20,7 @@ export interface Client extends Entity {
 // Asesor
 export interface Adviser extends Entity {
   numSalesOfMonth: number
-  officeAddress: OfficeAddress
+  officeAddress: string
 }
 
 // Instalador
@@ -63,5 +61,5 @@ export interface Maintenance {
   product: string
   flawDescription: string
   cliDoc: Client.doc
-  officeAddress: OfficeAddress
+  officeAddress: string
 }

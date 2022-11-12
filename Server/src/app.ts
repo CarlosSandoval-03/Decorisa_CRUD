@@ -20,6 +20,7 @@ export class App {
 
   middlewares (): void {
     this.app.use(morgan('dev'))
+    this.app.use(express.json())
   }
 
   routes (): void {
