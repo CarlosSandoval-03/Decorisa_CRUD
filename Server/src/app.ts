@@ -1,7 +1,7 @@
 import express, { Application } from 'express'
 import morgan from 'morgan'
 
-import IndexRoutes from './Routes/index.routes'
+import AuthRoutes from './Routes/auth.routes'
 import PostRoutes from './Routes/office.routes'
 
 export class App {
@@ -24,7 +24,7 @@ export class App {
   }
 
   routes (): void {
-    this.app.use(IndexRoutes)
+    this.app.use(AuthRoutes)
     this.app.use('/sucursales', PostRoutes)
   }
 
