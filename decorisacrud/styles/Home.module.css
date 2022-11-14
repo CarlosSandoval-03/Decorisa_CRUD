@@ -118,12 +118,13 @@
 @media (prefers-color-scheme: dark) {
   .card,
   .footer {
-    border-color: #222;
+    border-color: rgba(255, 255, 255, 0.842);
   }
   .code {
-    background: #111;
+    background: rgb(255, 255, 255);
   }
   .logo img {
     filter: invert(1);
   }
 }
+
