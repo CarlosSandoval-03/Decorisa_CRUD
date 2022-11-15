@@ -1,7 +1,7 @@
-import { createPool, Pool } from 'mysql2/promise'
+import { createPool, Pool } from 'mysql2'
 
-export async function connect (userName: string, userPassword: string): Promise<Pool> {
-  const connection = await createPool({
+export function connect (userName: string, userPassword: string): Pool {
+  const connection = createPool({
     host: process.env.DB_HOST ?? '127.0.0.1',
     port: Number(String(process.env.DB_PORT)) ?? 3306,
     user: userName,

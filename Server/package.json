@@ -36,6 +36,12 @@
 		},
 		"extends": [
 			"./node_modules/ts-standard/eslintrc.json"
+		],
+		"@typescript-eslint/no-misused-promises": [
+			"error",
+			{
+				"checksSpreads": false
+			}
 		]
 	}
 }

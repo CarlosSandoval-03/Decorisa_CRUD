@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { getOffices, getOfficeByName, createOffice, deleteOffice, updateOffice } from '../Controllers/office.controller'
+import { getOffices, getOfficeByAddress, createOffice, deleteOfficeByAddress, updateOfficeByAddress } from '../Controllers/office.controller'
 
 const router = Router()
 
@@ -8,9 +8,9 @@ router.route('/')
   .get(getOffices)
   .post(createOffice)
 
-router.route('/:name')
-  .get(getOfficeByName)
-  .delete(deleteOffice)
-  .put(updateOffice)
+router.route('/:address')
+  .get(getOfficeByAddress)
+  .delete(deleteOfficeByAddress)
+  .put(updateOfficeByAddress)
 
 export default router

@@ -1,105 +1,93 @@
 import { Request, Response } from 'express'
+import { QueryError, RowDataPacket } from 'mysql2'
 
 import { connect } from '../database'
 import { Office } from '../types'
 
-export function getOffices (_req: Request, res: Response): Response {
-  const promiseConnect = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-
-  const promiseQuery = promiseConnect.then(async conn => {
-    const offices = await conn.query('SELECT * FROM sucursal')
-    res.json(offices[0])
-    res.status(200)
-  })
-
-  promiseQuery.catch(error => {
-    console.error(error)
+export function getOffices (_req: Request, res: Response): Response | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
+  pool.query('SELECT * FROM sucursal', function(err: QueryError | null, rows: RowDataPacket[]) {
+    if (!err) {
+      res.status(200)
+      return res.json(rows)
+    }
     res.status(500)
+    return res.send({
+      err: err
+    })
   })
-  return res
 }
 
-export function getOfficeByName (req: Request, res: Response): Response {
-  const promiseConnect = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-  const name = req.params.name
-
-  const promiseQuery = promiseConnect.then(async conn => {
-    const office = await conn.query('SELECT * FROM sucursal WHERE suc_nombre = ?', [name])
-    res.json(office[0])
-    res.status(200)
-  })
-
-  promiseQuery.catch(error => {
-    console.error(error)
+export function getOfficeByAddress (req: Request, res: Response): Response | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
+  const officeAddress = req.params.address
+  pool.query('SELECT * FROM sucursal WHERE suc_direccion = ?', [officeAddress], function(err: QueryError | null, rows: RowDataPacket[]) {
+    if (!err) {
+      res.status(200)
+      return res.json(rows)
+    }
     res.status(500)
+    return res.send({
+      err: err
+    })
   })
-
-  return res
 }
 
-export function createOffice (req: Request, res: Response): Response {
+export function createOffice (req: Request, res: Response): Response | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
   const newOffice: Office = req.body
-
-  const promiseConnect = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-
-  const promiseQuery = promiseConnect.then(async conn => {
-    const data = await conn.query('INSERT INTO sucursal SET ?', [newOffice])
-
-    res.json({
-      message: 'New entry in Sucursal',
-      sucursal_creada: newOffice,
-      state: data[0]
-    })
-    res.status(200)
-  })
-
-  promiseQuery.catch(error => {
-    console.error(error)
+  pool.query('INSERT INTO sucursal SET ?', [newOffice], function(err: QueryError | null, rows: RowDataPacket[]) {
+    if (!err) {
+      res.status(200)
+      return res.json({
+        message: 'New entry in Sucursal',
+        sucursal_creada: newOffice,
+        state: rows
+      })
+    }
     res.status(500)
+    return res.send({
+      err: err
+    })
   })
 
-  return res
 }
 
-export function deleteOffice (req: Request, res: Response): Response {
-  const promiseConnect = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-  const name = req.params.name
+export function deleteOfficeByAddress (req: Request, res: Response): Response | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
+  const address = req.params.address
 
-  const promiseQuery = promiseConnect.then(async conn => {
-    const office = await conn.query('DELETE FROM sucursal WHERE suc_nombre = ?', [name])
-    res.json({
-      message: `Entry '${name}' deleted`,
-      sqlReport: office[0]
-    })
-    res.status(200)
-  })
-
-  promiseQuery.catch(error => {
-    console.error(error)
+  pool.query('DELETE FROM sucursal WHERE suc_direccion = ?', [address], function(err: QueryError | null, rows: RowDataPacket[]) {
+    if (!err) {
+      res.status(200)
+      return res.json({
+        message: `Entry '${address}' deleted`,
+        sqlReport: rows
+      })
+    }
     res.status(500)
+    return res.send({
+      err: err
+    })
   })
-
-  return res
 }
 
-export function updateOffice (req: Request, res: Response): Response {
-  const promiseConnect = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-  const name = req.params.name
+export function updateOfficeByAddress (req: Request, res: Response): Response | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
+  const address = req.params.address
   const newValueOffice: Office = req.body
 
-  const promiseQuery = promiseConnect.then(async conn => {
-    const office = await conn.query('UPDATE sucursal SET ? WHERE suc_nombre = ?', [newValueOffice, name])
-    res.json({
-      message: `Entry '${name}' updated`,
-      sqlReport: office[0]
-    })
-    res.status(200)
-  })
-
-  promiseQuery.catch(error => {
-    console.error(error)
+  pool.query('UPDATE sucursal SET ? WHERE suc_direccion = ?', [newValueOffice, address], function(err: QueryError | null, rows: RowDataPacket[]) {
+    if (!err) {
+      res.status(200)
+      return res.json({
+        message: `Entry '${address}' updated`,
+        sqlReport: rows
+      })
+    }
     res.status(500)
+    return res.send({
+      err: err
+    })
   })
-
-  return res
 }
