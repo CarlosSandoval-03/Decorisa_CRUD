@@ -24,8 +24,8 @@ export class App {
   }
 
   routes (): void {
-    this.app.use(AuthRoutes)
-    this.app.use('/sucursales', PostRoutes)
+    this.app.use('/api',AuthRoutes)
+    this.app.use('/api/sucursales', PostRoutes)
   }
 
   listen (): void {
