@@ -1,7 +1,7 @@
 // Sucursal
 export interface Office {
-  suc_direccion: string
-  suc_nombre: string
+  address: string
+  name: string
 }
 
 // Persona
@@ -19,7 +19,7 @@ export interface Client extends Entity {
 
 // Asesor
 export interface Adviser extends Entity {
-  numSalesOfMonth: number
+  numSalesOfMonth: number | null
   officeAddress: string
 }
 
@@ -28,7 +28,7 @@ export type InstallerSpecialty = 'Cortinas' | 'Pisos'
 
 export interface Installer extends Entity {
   specialty: InstallerSpecialty
-  rate: number
+  rate: number | null
 }
 
 // Cita
@@ -59,7 +59,45 @@ export interface Maintenance {
   id: number
   type: MaintenanceType
   product: string
-  flawDescription: string
+  flawDescription: string | null
   cliDoc: Client.doc
+  officeAddress: Office.address
+}
+
+// Venta
+export interface Sale {
+  id: number
+  clientDoc: Client.doc
+  adviserDoc: Adviser.doc
+  date: Date
+  installerDoc: Installer.doc
+  price: number | null
+}
+
+// Pedido
+export interface Order {
+  id: number
+  paymentMethod: string | null
+  shippingDate: Date
+  deliveryDate: Date | null
   officeAddress: string
+  companyName: string
+  saleId: Sale.id
+  price: number
+}
+
+export interface Producer {
+  companyName: string
+  numContact: number
+  nameContact: string
+  productsType: string
+  purchasesMonth: number | null
+}
+
+export interface SaleIncludesProduct {
+  saleId: Sale.id
+  productName: Product.nameId
+  producerCompanyName: Producer.companyName
+  productWidth: number
+  productHeight: number
 }
