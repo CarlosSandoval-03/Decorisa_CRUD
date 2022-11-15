@@ -3,6 +3,7 @@ import morgan from 'morgan'
 
 import AuthRoutes from './Routes/auth.routes'
 import PostRoutes from './Routes/office.routes'
+import ClientRoutes from './Routes/client.routes'
 
 export class App {
   private readonly app: Application
@@ -25,7 +26,8 @@ export class App {
 
   routes (): void {
     this.app.use('/api',AuthRoutes)
-    this.app.use('/api/sucursales', PostRoutes)
+    this.app.use('/api/sucursal', PostRoutes)
+    this.app.use('/api/cliente', ClientRoutes)
   }
 
   listen (): void {

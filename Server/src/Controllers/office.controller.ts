@@ -1,12 +1,11 @@
 import { Request, Response } from 'express'
 import { QueryError, RowDataPacket } from 'mysql2'
 
-import { connect } from '../database'
+import { executeQuery } from '../database'
 import { Office } from '../types'
 
 export function getOffices (_req: Request, res: Response): Response | void {
-  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
-  pool.query('SELECT * FROM sucursal', function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('SELECT * FROM sucursal' ,function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
@@ -19,9 +18,8 @@ export function getOffices (_req: Request, res: Response): Response | void {
 }
 
 export function getOfficeByAddress (req: Request, res: Response): Response | void {
-  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
   const officeAddress = req.params.address
-  pool.query('SELECT * FROM sucursal WHERE suc_direccion = ?', [officeAddress], function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('SELECT * FROM sucursal WHERE suc_direccion = ?', function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
@@ -30,13 +28,12 @@ export function getOfficeByAddress (req: Request, res: Response): Response | voi
     return res.send({
       err: err
     })
-  })
+  }, [officeAddress])
 }
 
 export function createOffice (req: Request, res: Response): Response | void {
-  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
   const newOffice: Office = req.body
-  pool.query('INSERT INTO sucursal SET ?', [newOffice], function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('INSERT INTO sucursal SET ?', function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json({
@@ -49,15 +46,12 @@ export function createOffice (req: Request, res: Response): Response | void {
     return res.send({
       err: err
     })
-  })
-
+  }, [newOffice])
 }
 
 export function deleteOfficeByAddress (req: Request, res: Response): Response | void {
-  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
   const address = req.params.address
-
-  pool.query('DELETE FROM sucursal WHERE suc_direccion = ?', [address], function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('DELETE FROM sucursal WHERE suc_direccion = ?', function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json({
@@ -69,15 +63,14 @@ export function deleteOfficeByAddress (req: Request, res: Response): Response | 
     return res.send({
       err: err
     })
-  })
+  }, [address])
 }
 
 export function updateOfficeByAddress (req: Request, res: Response): Response | void {
-  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
   const address = req.params.address
   const newValueOffice: Office = req.body
 
-  pool.query('UPDATE sucursal SET ? WHERE suc_direccion = ?', [newValueOffice, address], function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('UPDATE sucursal SET ? WHERE suc_direccion = ?', function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json({
@@ -89,5 +82,5 @@ export function updateOfficeByAddress (req: Request, res: Response): Response | 
     return res.send({
       err: err
     })
-  })
+  }, [newValueOffice, address])
 }
