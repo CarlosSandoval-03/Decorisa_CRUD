@@ -105,6 +105,30 @@ a {
 span{
   margin-left: 16px;
 }
+.ventas{
+  
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px 10px 10px;
+  align-items: center;
+  justify-content: center;
+  
+}
+.ventas-container{
+  background-color: rgb(233, 227, 222);
+  display: flex;
+  flex-wrap: wrap;
+  height: 500px;
+  width: 40%;
+  margin: 2rem;
+  
+  justify-content: center;
+  
+}
+
+
+
+
 
 
 
