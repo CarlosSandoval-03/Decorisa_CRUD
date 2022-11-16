@@ -62,12 +62,12 @@ export function deleteElement(res: Response, { tableName, conditionRow, param }:
   }, [param])
 }
 
-export function updateElement(res: Response, { tableName, conditionRow, params }: {tableName: string, conditionRow: string, params: any[]}): Response | void {
-  executeQuery(`UPDATE ${tableName} SET ? WHERE ${conditionRow} = ${params[1]}`, function(err: QueryError | null, rows: RowDataPacket[]) {
+export function updateElement(res: Response, { tableName, conditionRow, object, param }: {tableName: string, conditionRow: string, object: any, param: any}): Response | void {
+  executeQuery(`UPDATE ${tableName} SET ? WHERE ${conditionRow} = '${param}'`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json({
-        message: `Entry with '${conditionRow}' = '${params[1]}', new value: '${params[0]}' in ${tableName}`,
+        message: `Entry with '${conditionRow}' = '${param}', new value in ${tableName}`,
         sqlReport: rows
       })
     }
@@ -75,5 +75,5 @@ export function updateElement(res: Response, { tableName, conditionRow, params }
     return res.send({
       err: err
     })
-  },params)
+  },[object, param])
 }

@@ -38,10 +38,12 @@ export function deleteClientByDocument(req: Request, res: Response): Response | 
 }
 
 export function updateClientByDocument(req: Request, res: Response): Response | void {
+  const newClient: Client = req.body
   const obj = {
     tableName: 'cliente',
     conditionRow: 'cli_documento',
-    params: [req.body, req.params.document]
+    object: newClient,
+    param: req.params.document
   }
 
   return updateElement(res,obj)
