@@ -1,4 +1,6 @@
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html,
 body {
@@ -7,6 +9,24 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+table,th,td {
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  
+}
+
+th, td{
+  border-bottom: 2px solid rgb(1, 1, 1);
+  padding-top: 10px;
+}
+th{
+  background-color: #F6A333;
+}
+
 
 a {
   color: inherit;
@@ -28,11 +48,12 @@ a {
 }
 
   .navbar{
-  background-color:rgb(251, 126, 81);
+  background-color:rgb(255, 255, 255);
   height: 80px;
   display:flex;
   justify-content: flex-start;
   align-items:center;
+  box-shadow:2px 2px 10px 3px rgba(80, 80, 80, 0.2);
   
   }
   .menu-bars{
@@ -48,7 +69,7 @@ a {
   }
 
   .nav-menu{
-      background-color:rgb(251, 126, 81);
+      background-color:rgb(255, 255, 255);
       width: 200px;
       height: 100vh;
       display: flex;
@@ -57,6 +78,8 @@ a {
       top:0;
       left:-100%;
       transition: 850ms;
+      box-shadow:2px 2px 10px 3px rgba(80, 80, 80, 0.2);
+      
   }
 .nav-menu.active{
   left:0;
@@ -80,6 +103,10 @@ a {
   display: flex;
   align-items: center;
   padding: 0 16px;
+  border-bottom: 1px solid rgb(254, 109, 5);
+ 
+
+  
 
 }
 
@@ -92,8 +119,8 @@ a {
 }
 
 .navbar-toggle{
-  background-color: rgb(251, 126, 81);
-  width: 100%;
+  background-color: rgb(255, 255, 255);
+  width: 80px;
   height: 100;
   display: flex;
   justify-content: flex-start;
@@ -106,26 +133,104 @@ span{
   margin-left: 16px;
 }
 .ventas{
+
+  padding: 50px 10px 10px 100px;
+  align-items: flex-start;
+  justify-content:flex-start;
   
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px 10px 10px 10px;
-  align-items: center;
-  justify-content: center;
   
 }
-.ventas-container{
-  background-color: rgb(233, 227, 222);
+.ventas-realizadas{
   display: flex;
   flex-wrap: wrap;
-  height: 500px;
-  width: 40%;
-  margin: 2rem;
-  
-  justify-content: center;
+  height: 50px;
+  width: 600px;
+  align-items:baseline;
+  justify-content:space-between;
+ 
+}
+.ventas-info{
+  width: 80%;
+  height: auto;
+  margin-top: 15px;
   
 }
 
+.input{
+  width: 150px;
+  height: 20px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  background-color:#F6A333;
+  border-radius: 4px;
+  border-color: black;
+}
+
+.button-detalles{
+  background-color:#F6A333;
+  border: none;
+  justify-content: center;
+  border-radius: 2px;
+  height: 0.7cm;
+  width: 3cm;
+
+  
+}
+.button-detalles:hover{
+  background-color: rgb(249, 192, 166);
+}
+.detalles{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.tr1{
+  background-color: #A7AFA1;
+}
+.tr0{
+  background-color: rgb(255, 255, 255);
+}
+
+.color-icon{
+  color:rgb(255, 106, 0);
+}
+
+.ventana{
+  height: 300px;
+  width: 80%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 10px 3px rgba(80, 80, 80, 0.2);
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: 0.3 ease all;
+  overflow-y: scroll;
+
+
+
+}
+.ventas.ventana{
+  background: rgba(0,0,0,0.3);
+}
+.ventana .btn{
+  font-size: 30px;
+  line-height: 8px;
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  text-align:right;
+  color:#fb985f;
+  transition: 0.3 ease all;
+  
+
+}
+.ventana .btn:hover{
+  color:rgb(3, 3, 3);
+}
 
 
 

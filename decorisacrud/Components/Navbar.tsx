@@ -9,12 +9,13 @@ import {IconContext} from 'react-icons'
 import Link from 'next/link';
 
 
+
 function Navbar() {
   const [sidebar, setSidebar]= useState(false)
   const stateSideBar= ()=> setSidebar(!sidebar)
   return (
     <>
-    <IconContext.Provider value={{color:'White'}}>
+    <IconContext.Provider value={{className:'color-icon'}}>
       <div className='navbar'>
         <div className='menu-bars'>
           <iconBar.FaBars onClick={stateSideBar}/>
