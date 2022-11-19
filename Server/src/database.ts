@@ -1,4 +1,4 @@
-import { createPool, Pool } from 'mysql2'
+import { createPool, Pool, QueryError, RowDataPacket } from 'mysql2'
 
 export function connect (userName: string, userPassword: string): Pool {
   const connection = createPool({
@@ -11,4 +11,10 @@ export function connect (userName: string, userPassword: string): Pool {
   })
 
   return connection
+}
+
+
+export function executeQuery(query: string, callback: (err: QueryError | null, rows: RowDataPacket[]) => RowDataPacket[] | Object, params?: any[]): RowDataPacket[] | void {
+  const pool = connect(process.env.DB_TEST_USER ?? '', process.env.DB_TEST_PASSWORD ?? '')
+  pool.query(query, params ?? [], callback)
 }
