@@ -2,16 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
+html,body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
-
+h1{
+  color: black;
+  font-size: 35px;
+  font-weight: bold;
+  
+}
+h2{
+  color: black;
+  font-size: 20px;
+  font-weight:500;
+}
 table,th,td {
   text-align: left;
+
 }
 
 table {
@@ -20,12 +30,17 @@ table {
 }
 
 th, td{
-  border-bottom: 2px solid rgb(1, 1, 1);
+  border-bottom: 1px solid rgb(1, 1, 1);
+  border-left: 1px solid rgb(255, 255, 255);
   padding-top: 10px;
 }
 th{
-  background-color: #F6A333;
+  background-color: #f18241;
 }
+th.formVP{
+  background-color: #6BA5A7;
+}
+
 
 
 a {
@@ -132,7 +147,7 @@ a {
 span{
   margin-left: 16px;
 }
-.ventas{
+.pagina{
 
   padding: 50px 10px 10px 100px;
   align-items: flex-start;
@@ -156,19 +171,35 @@ span{
   
 }
 
-.input{
+input{
   width: 150px;
   height: 20px;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin:10px 10px 10px 10px ;
   box-sizing: border-box;
-  background-color:#F6A333;
+  background-color:#FFB375;
   border-radius: 4px;
-  border-color: black;
+  border-color: rgb(0, 0, 0);
+  cursor:pointer;
+  
+}
+select{
+  width: 150px;
+  height: 20px;
+  padding: 12px 20px;
+  margin: 10px 10px 10px 10px;
+  box-sizing: border-box;
+  background-color:#FFB375;
+  border-radius: 4px;
+  border-color: rgb(0, 0, 0);
+  cursor:pointer;
+  font-weight: bold;
+
 }
 
+
 .button-detalles{
-  background-color:#F6A333;
+  background-color:#FFB375;
   border: none;
   justify-content: center;
   border-radius: 2px;
@@ -188,7 +219,7 @@ span{
 }
 
 .tr1{
-  background-color: #A7AFA1;
+  background-color: #e3e3e3;
 }
 .tr0{
   background-color: rgb(255, 255, 255);
@@ -216,7 +247,7 @@ span{
 .ventas.ventana{
   background: rgba(0,0,0,0.3);
 }
-.ventana .btn{
+.btn{
   font-size: 30px;
   line-height: 8px;
   position: absolute;
@@ -225,14 +256,79 @@ span{
   text-align:right;
   color:#fb985f;
   transition: 0.3 ease all;
+  cursor: pointer;
   
 
 }
-.ventana .btn:hover{
+
+.btn:hover{
   color:rgb(3, 3, 3);
 }
+.button-add{
+  font-size: 30px;
+  line-height: 8px;
+  right: 30px;
+  top: 20px;
+  color:#fb985f;
+  transition: 0.3 ease all;
+  cursor: pointer;
+}
+.button-add:hover{
+  color:rgb(3, 3, 3);
+}
+.formVP{
+  height: 400px;
+  width: 50%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 10px 3px rgba(80, 80, 80, 0.2);
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: 0.3 ease all;
+  overflow-y: scroll;
 
+}
+.ventana-producto{
+  height: 300px;
+  width: 200px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 2px 2px 10px 3px rgba(80, 80, 80, 0.2);
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: 0.3 ease all;
+  
 
+}
+.formPr{
+  height: 200px;
+  width: 50%;
+  background-color: rgb(103, 169, 230);
+  box-shadow: 2px 2px 10px 3px rgba(80, 80, 80, 0.2);
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: 0.3 ease all;
+  overflow-y: scroll;
+
+}
+.producto{
+  height: 200px;
+  width: 350px;
+  background-color: #CDF3F4;
+  padding: 10px;
+  margin: 4px;
+  border-radius: 10px;
+}
+.imagen{
+  height: 180px;
+  width: 90%;
+  background-color: #148387;
+  border-radius: 2rem;
+}
 
 
 
