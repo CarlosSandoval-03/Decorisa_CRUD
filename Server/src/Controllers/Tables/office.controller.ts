@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
-import { Office } from '../types'
-import { createElement, deleteElement, getAll, getElementByEquality, updateElement } from './crud.controller'
+import { Office } from '../../types'
+import { createElement, deleteElement, getAll, getElementByEquality, updateElement } from '../crud.controller'
 
 export function getOffices (_req: Request, res: Response): Response | void {
   return getAll(res, 'sucursal')

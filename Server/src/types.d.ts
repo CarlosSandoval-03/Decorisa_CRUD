@@ -86,6 +86,7 @@ export interface Order {
   price: number
 }
 
+// Productor
 export interface Producer {
   companyName: string
   numContact: number
@@ -94,6 +95,7 @@ export interface Producer {
   purchasesMonth: number | null
 }
 
+// Venta_Incluye_Producto
 export interface SaleIncludesProduct {
   saleId: Sale.id
   productName: Product.nameId
