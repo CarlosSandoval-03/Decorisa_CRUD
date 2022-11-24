@@ -61,7 +61,7 @@ export function getElementByMultipleRowEquality(res: Response, { tableName, cond
     return res.send({
       err: err
     })
-  },[params])
+  },params)
 }
 
 export function createElement(res: Response, { tableName, object }: {tableName: string, object: any}): Response | void {
@@ -106,7 +106,7 @@ export function deleteElementForMultipleRows(res: Response, { tableName, conditi
     })
   }
 
-  let query = `DELETE * FROM ${tableName} ` + multipleParamsCondition;
+  let query = `DELETE FROM ${tableName} ` + multipleParamsCondition;
   executeQuery(query, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
@@ -119,7 +119,7 @@ export function deleteElementForMultipleRows(res: Response, { tableName, conditi
     return res.send({
       err: err
     })
-  }, [params])
+  }, params)
 }
 
 export function updateElement(res: Response, { tableName, conditionRow, object, param }: {tableName: string, conditionRow: string, object: any, param: any}): Response | void {

@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createProduct, deleteProductByCompanyName, deleteProductByName, deleteProductByPrimaryKey, getProductByCompanyName, getProductByName, getProductByPrimaryKey, getProducts, updateProductByCompanyName, updateProductByName, updateProductByPrimaryKey } from '../../Controllers/Tables/product.controller'
+import { createProduct, deleteProductByPrimaryKey, getProductByCompanyName, getProductByName, getProductByPrimaryKey, getProducts, updateProductByPrimaryKey } from '../../Controllers/Tables/product.controller'
 
 
 
@@ -11,13 +11,9 @@ router.route('/')
 
   router.route('/atributo/pro_nombre/:nombre_producto')
   .get(getProductByName)
-  .delete(deleteProductByName)
-  .put(updateProductByName)
 
 router.route('/atributo/pro_empresa/:nombre_empresa')
   .get(getProductByCompanyName)
-  .delete(deleteProductByCompanyName)
-  .put(updateProductByCompanyName)
 
   router.route('/llave/:llave')
   .get(getProductByPrimaryKey)
