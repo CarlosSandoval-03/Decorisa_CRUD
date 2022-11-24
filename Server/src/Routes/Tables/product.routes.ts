@@ -15,7 +15,7 @@ router.route('/')
 router.route('/atributo/pro_empresa/:nombre_empresa')
   .get(getProductByCompanyName)
 
-  router.route('/llave/:llave')
+  router.route('/key/:key')
   .get(getProductByPrimaryKey)
   .delete(deleteProductByPrimaryKey)
   .put(updateProductByPrimaryKey)

@@ -31,7 +31,7 @@ export function getProductByPrimaryKey(req: Request, res: Response): Response | 
   const obj = {
     tableName: 'producto',
     conditionRows: ['pro_nombreId', 'pro_nombreEmpresa'],
-    params: req.params.llave.split('&')
+    params: req.params.key.split('&')
   }
 
   return getElementByMultipleRowEquality(res, obj)
@@ -51,7 +51,7 @@ export function deleteProductByPrimaryKey(req: Request, res: Response): Response
   const obj = {
     tableName: 'producto',
     conditionRows: ['pro_nombreId', 'pro_nombreEmpresa'],
-    params: req.params.llave.split('&')
+    params: req.params.key.split('&')
   }
 
   return deleteElementForMultipleRows(res, obj)
@@ -63,7 +63,7 @@ export function updateProductByPrimaryKey(req: Request, res: Response): Response
     tableName: 'producto',
     conditionRows: ['pro_nombreId', 'pro_nombreEmpresa'],
     object: newProduct,
-    params: req.params.llave.split('&')
+    params: req.params.key.split('&')
   }
 
   return updateElementForMultipleRows(res, obj)

@@ -11,6 +11,9 @@ import ProducerRoutes from './Routes/Tables/producer.routes'
 import SaleRoutes from './Routes/Tables/sale.routes'
 import OrderRoutes from './Routes/Tables/order.routes'
 import ProductRoutes from './Routes/Tables/product.routes'
+import MaintenanceRoutes from './Routes/Tables/maintenance.routes'
+import AppointmentRoutes from './Routes/Tables/appointment.routes'
+import SaleIncludesProductRoutes from './Routes/Tables/sale_includes_product.routes'
 
 export class App {
   private readonly app: Application
@@ -31,9 +34,11 @@ export class App {
     this.app.use(express.json())
   }
 
-  routes (): void {
+  authRoutes (): void {
     this.app.use('/api',AuthRoutes)
+  }
 
+  tablesRoutes (): void {
     this.app.use('/api/cliente', ClientRoutes)
     this.app.use('/api/instalador', InstallerRoutes)
     this.app.use('/api/sucursal', OfficeRoutes)
@@ -42,10 +47,14 @@ export class App {
     this.app.use('/api/venta', SaleRoutes)
     this.app.use('/api/pedido', OrderRoutes)
     this.app.use('/api/producto', ProductRoutes)
-    // This
-    this.app.use('/api/mantenimiento', AdviserRoutes)
-    this.app.use('/api/cita', AdviserRoutes)
-    this.app.use('/api/venta_incluye_producto', AdviserRoutes)
+    this.app.use('/api/mantenimiento', MaintenanceRoutes)
+    this.app.use('/api/cita', AppointmentRoutes)
+    this.app.use('/api/venta_incluye_producto', SaleIncludesProductRoutes)
+  }
+
+  routes (): void {
+    this.authRoutes();
+    this.tablesRoutes();
   }
 
   listen (): void {
