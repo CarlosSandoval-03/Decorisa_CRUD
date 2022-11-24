@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 import { Appointment } from '../../types'
-import { createElement, deleteElementForMultipleRows, getAll, getElementByEquality, getElementByMultipleRowEquality, updateElementForMultipleRows } from '../crud.controller'
+import { createElement, deleteElement, deleteElementForMultipleRows, getAll, getElementByEquality, getElementByMultipleRowEquality, updateElementForMultipleRows } from '../crud.controller'
 
 export function getAppointments(_req: Request, res: Response): Response | void {
   return getAll(res, 'cita')
@@ -77,4 +77,25 @@ export function updateAppointmentByPrimaryKey(req: Request, res: Response): Resp
   }
 
   return updateElementForMultipleRows(res, obj)
+}
+
+
+export function deleteAppointmentByCliendId(req: Request, res: Response): Response | void {
+  const obj = {
+    tableName: 'cita',
+    conditionRow: 'cli_documento',
+    param: req.params.cli_documento
+  }
+
+  return deleteElement(res, obj)
+}
+
+export function deleteAppointmentByAdviserId(req: Request, res: Response): Response | void {
+  const obj = {
+    tableName: 'cita',
+    conditionRow: 'ase_documento',
+    param: req.params.ase_documento
+  }
+
+  return deleteElement(res, obj)
 }

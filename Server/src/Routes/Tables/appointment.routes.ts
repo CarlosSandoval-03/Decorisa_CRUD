@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createAppointment, deleteAppointmentByPrimaryKey, getAppointmentByAdviserId, getAppointmentByClientId, getAppointmentByDate, getAppointmentByPrimaryKey, getAppointments, updateAppointmentByPrimaryKey } from '../../Controllers/Tables/appointment.controller'
+import { createAppointment, deleteAppointmentByAdviserId, deleteAppointmentByCliendId, deleteAppointmentByPrimaryKey, getAppointmentByAdviserId, getAppointmentByClientId, getAppointmentByDate, getAppointmentByPrimaryKey, getAppointments, updateAppointmentByPrimaryKey } from '../../Controllers/Tables/appointment.controller'
 
 
 
@@ -14,9 +14,11 @@ router.route('/')
 
 router.route('/atributo/ase_documento/:ase_documento')
   .get(getAppointmentByAdviserId)
+  .delete(deleteAppointmentByAdviserId)
 
   router.route('/atributo/cli_documento/:cli_documento')
   .get(getAppointmentByClientId)
+  .delete(deleteAppointmentByCliendId)
 
   router.route('/key/:key')
   .get(getAppointmentByPrimaryKey)
