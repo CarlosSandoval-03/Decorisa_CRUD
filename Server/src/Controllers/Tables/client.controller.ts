@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
-import { Client } from '../types'
-import { createElement, deleteElement, getAll, getElementByEquality, updateElement } from './crud.controller'
+import { Client } from '../../types'
+import { createElement, deleteElement, getAll, getElementByEquality, updateElement } from '../crud.controller'
 
 export function getClients(_req: Request, res: Response): Response | void {
   return getAll(res, 'cliente')

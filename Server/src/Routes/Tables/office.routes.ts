@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { getOffices, getOfficeByAddress, createOffice, deleteOfficeByAddress, updateOfficeByAddress } from '../Controllers/office.controller'
+import { getOffices, getOfficeByAddress, createOffice, deleteOfficeByAddress, updateOfficeByAddress } from '../../Controllers/Tables/office.controller'
 
 const router = Router()
 

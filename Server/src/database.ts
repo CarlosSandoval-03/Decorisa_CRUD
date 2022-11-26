@@ -7,7 +7,8 @@ export function connect (userName: string, userPassword: string): Pool {
     user: userName,
     password: userPassword ?? undefined,
     database: process.env.DB_NAME,
-    connectionLimit: Number(String(process.env.CONNECTION_LIMIT)) ?? 10
+    connectionLimit: Number(String(process.env.CONNECTION_LIMIT)) ?? 10,
+    ssl: {ca: process.env.DB_SSL}
   })
 
   return connection
