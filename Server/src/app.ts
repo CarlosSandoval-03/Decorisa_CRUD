@@ -19,6 +19,8 @@ import QueryRoutes from './Routes/Querys/querys.routes'
 
 import ViewRoutes from './Routes/Views/view.routes'
 
+import ProcedureRoutes from './Routes/Procedures/stored_procedures.routes'
+
 export class App {
   private readonly app: Application
 
@@ -64,11 +66,16 @@ export class App {
     this.app.use('/api/vistas', ViewRoutes)
   }
 
+  proceduresRoutes(): void {
+    this.app.use('/api/procedimientos', ProcedureRoutes)
+  }
+
   routes (): void {
-    this.authRoutes();
-    this.tablesRoutes();
-    this.queryRoutes();
-    this.viewsRoutes();
+    this.authRoutes()
+    this.tablesRoutes()
+    this.queryRoutes()
+    this.viewsRoutes()
+    this.proceduresRoutes()
   }
 
   listen (): void {
