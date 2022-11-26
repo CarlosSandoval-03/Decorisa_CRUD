@@ -17,6 +17,8 @@ import SaleIncludesProductRoutes from './Routes/Tables/sale_includes_product.rou
 
 import QueryRoutes from './Routes/Querys/querys.routes'
 
+import ViewRoutes from './Routes/Views/view.routes'
+
 export class App {
   private readonly app: Application
 
@@ -59,7 +61,7 @@ export class App {
   }
 
   viewsRoutes (): void {
-    this.app.use('/api/vistas', QueryRoutes)
+    this.app.use('/api/vistas', ViewRoutes)
   }
 
   routes (): void {
