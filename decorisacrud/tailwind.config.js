@@ -5,13 +5,13 @@ module.exports = {
     colors:{
         'orangePagina':{
           default:'#F56C1B',
-          light:'#FFB375'
+          light:'#FFB375',
 
         
         },
         'azul-turquesa':{
           default:'#6BA5A7',
-          light:'#CDF3F4'
+          light:'#CDF3F4',
         },
       
     },
