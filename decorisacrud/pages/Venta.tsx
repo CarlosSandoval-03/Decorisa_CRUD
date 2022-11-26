@@ -1,18 +1,11 @@
 import React, {  useState} from 'react'
-import Navbar from '../Components/Navbar'
-import ReactTable from 'react'
-import request from 'graphql-request';
-import { Column, useTable } from "react-table";
+import Navbar from '../Components/Navbar';
 import { Formik } from "formik";
-
 import * as iconMenu from 'react-icons/ai';
-
 import * as ioIcon from 'react-icons/io';
 import { IconContext } from 'react-icons';
-import { FaProductHunt } from 'react-icons/fa';
 
-var fechai:Date;
-var fechaf:Date;
+
 
 const rowData=[
   {
@@ -110,7 +103,13 @@ function Venta() {
     ven_precio:number,
     
     
-}
+  }
+  interface Fechas{
+      
+    fecha_inicio:string,
+    fecha_fin:string
+    
+  }
 
 
   const [showWindow, setShowWindow]= useState(false)
@@ -123,6 +122,11 @@ function Venta() {
   const stateShowWindow= (id:number):any=> {
     setIdVenta(id);
     setShowWindow(true);
+    
+  }
+  const borrarVenta= (id:number):any=> {
+    setIdVenta(id);
+    //llamar para que borre la venta con este id
     
   }
   const guardarInfo = async (values:initial) =>{
@@ -139,12 +143,9 @@ function Venta() {
     setHaveProducts(true)
   }
 
-  const getDates=() => {
-    
-  fechai= new Date((document.getElementById("fechai") as HTMLInputElement).value);
-  fechaf= new Date((document.getElementById("fechaf") as HTMLInputElement).value);
-
-
+  const getDates=async (values:Fechas)=>{
+    console.log(values.fecha_fin)
+    console.log(values.fecha_inicio)
   }
   
   const colorFondo= (a:number):string=> {
@@ -162,16 +163,26 @@ function Venta() {
     <>
         <Navbar></Navbar>
         <div className='pagina'>
-          <div className='grid grid-rows-1 grid-cols-2'>
+        
 
-            <h1 className='col-start-1'>Ventas realizadas</h1>
-            <button onClick={()=>setShowForm(true)} className='col-start-2 text-right' >
-              <IconContext.Provider value={{className:'bg-orange-600 text-3xl'}}>
-                <ioIcon.IoMdAddCircle className='bg-orange w-24'/>
-              </IconContext.Provider>
+            
+            <div className='flex flex-wrap items-center'>
+              <h1>Ventas realizadas</h1>
+              <div className='flex flex-wrap place-items-end'>
+                <button onClick={()=>setShowForm(true)} className=' text-right' >
+                  <IconContext.Provider value={{className:'button-add'}}>
+                    <ioIcon.IoMdAddCircle />
+                  </IconContext.Provider>
+                
+                </button>
+                <h2>Nueva Venta</h2>
+
+
+              </div>
               
-            </button>
-          </div>
+            </div>
+            
+          
         
         
         
@@ -179,6 +190,7 @@ function Venta() {
           <div className='formVP'>
             <div className='grid grid-rows-1 grid-cols-2'>
               <div className='col-start-1'>
+                {/* Formulario de creacion de venta */}
               <Formik
           initialValues={{
             cli_Documento:0,
@@ -215,7 +227,7 @@ function Venta() {
                     >
                       {Clientes.map((item,index)=>{
                         return(
-                          <option value={item.cli_documento}>{item.cli_nombreCompleto}</option>
+                          <option key={index} value={item.cli_documento}>{item.cli_nombreCompleto}</option>
                         )
                       })}
                     </select>
@@ -229,7 +241,7 @@ function Venta() {
                     >
                       {Instaladores.map((item,index)=>{
                         return(
-                          <option value={item.ins_documento}>{item.ins_nombreCompleto}</option>
+                          <option key={index} value={item.ins_documento}>{item.ins_nombreCompleto}</option>
                         )
                       })}
                     </select>
@@ -243,7 +255,7 @@ function Venta() {
                     >
                       {Asesores.map((item,index)=>{
                         return(
-                          <option value={item.ase_documento}>{item.ase_nombreCompleto}</option>
+                          <option key={index} value={item.ase_documento}>{item.ase_nombreCompleto}</option>
                         )
                       })}
                     </select>
@@ -299,6 +311,7 @@ function Venta() {
                   
                   <div>
                     <div className=" ">
+                      {/* Formulario para añadir productos a la venta*/ }
                     <Formik
                     initialValues={{
                       ven_id:0,
@@ -365,7 +378,7 @@ function Venta() {
                     
                     
                     <div className='flex flex-col justify-center items-center '>
-                      <button type="submit"  className="button-detalles "> Añadir </button>  
+                      <button type="submit"  className="btn-add-product "> Añadir </button>  
                     </div>
                             
                 </form>
@@ -381,11 +394,6 @@ function Venta() {
                 :null}
 
                 </div>
-                
-        
-                
-                
-                
               </div>
               <div className='col-span-2'>
 
@@ -405,9 +413,9 @@ function Venta() {
                   return(
 
                     <>
-                    <tr className={colorFondo(index)}>
+                    <tr key={index}className={colorFondo(index)}>
                       <td >{pro.pro_nombreId}</td>
-                      <td>{pro.productor_pro_nombreEmpresa}</td>
+                      <td >{pro.productor_pro_nombreEmpresa}</td>
                       <td>{pro.vip_prod_ancho}</td>
                       <td>{pro.vip_prod_alto}</td>
                       <td>{pro.vip_cantidad}</td>
@@ -466,7 +474,7 @@ function Venta() {
                     
                       {rowData.map((item,index)=>{
                       return(
-                        <><tr className={colorFondo(index)}>
+                        <><tr key={index}className={colorFondo(index)}>
                           <td >{item.idVenta}</td>
                           <td>{item.Cliente}</td>
                           <td>{item.precio}</td>
@@ -490,24 +498,62 @@ function Venta() {
                   ):null
         
                 }
+                {/* Formulario de fechas*/}
+              <Formik
+                    initialValues={{
+                      fecha_inicio:'',
+                      fecha_fin:''
+                    }}
+                    onSubmit={async (values) => {
+
+                        getDates(values)
 
 
+                        //alert(JSON.stringify(values));
+
+                    }}
+
+                >
+                    {({ handleSubmit, values, handleChange }) => (
+                        <form onSubmit={handleSubmit}>
+                            <div className='flex flex-nowrap'>
+                                <div className="flex flex-nowrap items-center ">
+                                    <label className="">Fecha Inicio:</label>
+                                    <input name="fecha_inicio" type="date" placeholder="" className=""
+                                        value={values.fecha_inicio}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="flex flex-nowrap items-center ">
+                                    <label className="">Fecha Fin:</label>
+                                    <input name="fecha_fin" type="date" placeholder="" className=""
+                                        value={values.fecha_fin}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className='flex flex-col justify-center items-center '>
+                                    <button type="submit" className="button-detalles "> Filtrar </button>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </form>
+                    )}
+
+                </Formik>
         
         
-          <form className='ventas-realizadas'>
-
-            <label>Fecha inicio </label>
-            <input id='fechai' type='Date'  className='input'  ></input>
-            <label>Fecha fin</label>
-            <input id='fechaf' type='Date'  className='input' ></input>
-          </form>
+          
 
         <div className='ventas-info'>
         
 
-        <table>
+        <table className='w-auto'>
           <tbody>
-            <tr>  
+            <tr className=''>  
               <th>Id Venta</th>
               <th>Cliente</th>
               <th>Precio</th>
@@ -516,15 +562,22 @@ function Venta() {
             {rowData.map((item,index)=>{
               return(
                 <>
-                <tr className={colorFondo(index)}>
-                  <td >{item.idVenta}</td>
-                  <td>{item.Cliente}</td>
-                  <td>{item.precio}</td>
-                  <td className='detalles'>
+                <tr key={index} className={colorFondo(index)} >
+                  <td className='w-48'>
+                  <button  className='button-eliminar' onClick={()=>{borrarVenta(item.idVenta)}}>
+                    <h2 className='fond-bold'>Eliminar</h2>
+                    
+                    </button>
+                    {item.idVenta}</td>
+                  <td className='w-72'>{item.Cliente}</td>
+                  <td className='w-36'>{item.precio}</td>
+                  <td className='detalles w-32'>
 
                     <button  className='button-detalles' onClick={()=>{stateShowWindow(item.idVenta)
                     
-                    }}>Detalles</button>
+                    }}>
+                    <h2 className='fond-bold'>Detalles</h2>
+                    </button>
                   </td>
             
 
