@@ -15,6 +15,8 @@ import MaintenanceRoutes from './Routes/Tables/maintenance.routes'
 import AppointmentRoutes from './Routes/Tables/appointment.routes'
 import SaleIncludesProductRoutes from './Routes/Tables/sale_includes_product.routes'
 
+import QueryRoutes from './Routes/Querys/querys.routes'
+
 export class App {
   private readonly app: Application
 
@@ -52,9 +54,14 @@ export class App {
     this.app.use('/api/venta_incluye_producto', SaleIncludesProductRoutes)
   }
 
+  queryRoutes (): void {
+    this.app.use('/api/consultas', QueryRoutes)
+  }
+
   routes (): void {
     this.authRoutes();
     this.tablesRoutes();
+    this.queryRoutes();
   }
 
   listen (): void {

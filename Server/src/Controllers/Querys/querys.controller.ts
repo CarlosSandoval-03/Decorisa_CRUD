@@ -18,7 +18,7 @@ export function getProfitPerProduct(_req: Request, res: Response): Response | vo
 }
 
 export function getCommissionPerAdviser(req: Request, res: Response): Response | void {
-  const percentaje = req.params.variables
+  const percentaje = req.params.percentaje
 
   executeQuery(`SELECT asesor.per_documento,(SUM(product_precio*cantidad)*(?/100)) AS Comision
                   FROM (asesor JOIN venta ON (asesor.per_documento=venta.ase_documento)
@@ -46,7 +46,7 @@ export function getProductsInPriceRange(req: Request, res: Response): Response |
     return res.send({
       err: err
     })
-  }, [req.params.variables.split("&").flat()])
+  }, [req.params.interval.split("&").flat()])
 }
 
 export function getPendingAppointmentsByAdvisor(_req: Request, res: Response): Response | void {
@@ -74,11 +74,11 @@ export function getProfitsPerInstaller(req: Request, res: Response): Response | 
     return res.send({
       err: err
     })
-  }, [req.params.variables.split("&").flat()])
+  }, [req.params.interval.split("&").flat()])
 }
 
 export function getOrderPerProducer(req: Request, res: Response): Response | void {
-  executeQuery(`SELECT PRODUCTOR.pro_nombreEmpresa, COUNT(ped_id) AS Num_pedidos FROM PRODUCTOR NATURAL JOIN PEDIDO NATURAL 
+  executeQuery(`SELECT PRODUCTOR.pro_nombreEmpresa, COUNT(ped_id) AS Num_pedidos FROM PRODUCTOR NATURAL JOIN PEDIDO NATURAL
                   JOIN VENTA WHERE VENTA.ven_fecha like ? GROUP BY PRODUCTOR.pro_nombreEmpresa;`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
@@ -88,7 +88,7 @@ export function getOrderPerProducer(req: Request, res: Response): Response | voi
     return res.send({
       err: err
     })
-  }, ['%-' + req.params.variables.split("&").flat()[0] + '-%'])
+  }, ['%-' + req.params.month.split("&").flat()[0] + '-%'])
 }
 
 export function getMostSelledProducts(_req: Request, res: Response): Response | void {
