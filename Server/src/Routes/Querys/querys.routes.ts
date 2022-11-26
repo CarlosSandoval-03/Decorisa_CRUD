@@ -10,13 +10,13 @@ router.route('/ganancias_producto')
 router.route('/comision_asesor/:percentaje') // 0:100 int
   .get(getCommissionPerAdviser)
 
-router.route('/productos_intervalo/:interval') // min&max date
+router.route('/productos_intervalo/:interval') // min&max date YYYY-MM-DD
   .get(getProductsInPriceRange)
 
 router.route('/citas_pendientes')
     .get(getPendingAppointmentsByAdvisor)
 
-router.route('/ganancias_instalador_intervalo/:interval') // min&max date
+router.route('/ganancias_instalador_intervalo/:interval') // min&max date YYYY-MM-DD
   .get(getProfitsPerInstaller)
 
 router.route('/pedidos_mes/:month') // 1:12 int
@@ -25,7 +25,7 @@ router.route('/pedidos_mes/:month') // 1:12 int
 router.route('/mas_vendidos')
   .get(getMostSelledProducts)
 
-router.route('/citas_programadas/:variables') // YYYY-MM-DD Date
+router.route('/citas_programadas/:variables') // YYYY-MM-DD date YYYY-MM-DD
   .get(getAppointmentsForDay)
 
 router.route('/promedio_envio')
