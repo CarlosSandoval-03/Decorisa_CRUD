@@ -58,10 +58,15 @@ export class App {
     this.app.use('/api/consultas', QueryRoutes)
   }
 
+  viewsRoutes (): void {
+    this.app.use('/api/vistas', QueryRoutes)
+  }
+
   routes (): void {
     this.authRoutes();
     this.tablesRoutes();
     this.queryRoutes();
+    this.viewsRoutes();
   }
 
   listen (): void {
