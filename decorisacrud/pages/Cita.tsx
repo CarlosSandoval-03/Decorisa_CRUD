@@ -293,7 +293,7 @@ function Cita() {
                     <div className='flex flex-wrap'>
                       <label>Asesor:</label>
                       <h4>{item.ase_documento}</h4>
-                    </div>
+                    </div> 
                     <div className='flex flex-wrap'>
                       <label>Direccion:</label>
                       <h4>{item.cit_direccion}</h4>

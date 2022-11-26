@@ -421,7 +421,7 @@ select{
   font-size: 30px;
   line-height: 8px;
   position: relative;
-  right: -93%;
+  right: -90%;
   text-align:right;
   color:#fb985f;
   transition: 0.3 ease all;
@@ -537,4 +537,34 @@ select{
   margin-top:10px ;
 }
 
+/* Sucrusal*/
 
+.sucursal{
+  width: 317px;
+  height: 381px;
+  background: #FFEEDF;
+  border-radius: 10px;
+  box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
+  padding: 8px 8px 8px 8px;
+  margin: 8px 8px 8px 8px;
+  
+
+}
+.circulo{
+  width: 144px;
+  height: 144px;
+  border-radius: 50%;
+  background-color: #FF9F76;
+  align-items: center;
+  
+}
+.ventana-edit-sucursal{
+  width: 317px;
+  height: 381px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
+  padding: 8px 8px 8px 8px;
+  margin: 8px 8px 8px 8px;
+  
+}
