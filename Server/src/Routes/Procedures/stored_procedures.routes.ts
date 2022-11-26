@@ -16,4 +16,4 @@ router.route('/detalle_venta/:idVenta')
 router.route('/citas_pendientes')
   .get(getPendingAppointments)
 
-  export default router
+export default router

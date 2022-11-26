@@ -79,7 +79,7 @@ export function getProfitsPerInstaller(req: Request, res: Response): Response | 
 
 export function getOrderPerProducer(req: Request, res: Response): Response | void {
   let month = req.params.month.split("&").flat()[0]
-  
+
   if (parseInt(req.params.month.split("&").flat()[0]) < 10) {
       month = '0' + parseInt(req.params.month.split("&").flat()[0])
   }

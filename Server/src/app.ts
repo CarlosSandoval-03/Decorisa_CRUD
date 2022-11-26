@@ -20,6 +20,7 @@ import QueryRoutes from './Routes/Querys/querys.routes'
 import ViewRoutes from './Routes/Views/view.routes'
 
 import ProcedureRoutes from './Routes/Procedures/stored_procedures.routes'
+import FunctionsRoutes from './Routes/Procedures/functions.routes'
 
 export class App {
   private readonly app: Application
@@ -68,6 +69,7 @@ export class App {
 
   proceduresRoutes(): void {
     this.app.use('/api/procedimientos', ProcedureRoutes)
+    this.app.use('/api/funciones', FunctionsRoutes)
   }
 
   routes (): void {
