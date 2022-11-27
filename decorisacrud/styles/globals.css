@@ -378,7 +378,7 @@ select{
   height: 0.7cm;
   width: 3cm;
   border-radius: 20px;
-  
+  box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
   background-color:#B0FFFA;
   transition: 0.3 ease all;
   cursor: pointer;
@@ -546,10 +546,29 @@ select{
   border-radius: 10px;
   box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
   padding: 8px 8px 8px 8px;
-  margin: 8px 8px 8px 8px;
+  margin: 15px 15px 15px 15px;
   
 
 }
+.sucursal-nuevo{
+  width: 317px;
+  height: 308px;
+  background: #FFEEDF;
+  border-radius: 10px;
+  box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
+  padding: 8px 8px 8px 8px;
+  margin: 15px 15px 15px 15px;
+}
+.sucursal-form{
+  width: 317px;
+  height: 308px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
+  padding: 8px 8px 8px 8px;
+  margin: 15px 15px 15px 15px;
+}
+
 .circulo{
   width: 144px;
   height: 144px;
@@ -565,6 +584,15 @@ select{
   border-radius: 10px;
   box-shadow: 0px 7px 5px rgba(80, 80, 80, 0.2);
   padding: 8px 8px 8px 8px;
-  margin: 8px 8px 8px 8px;
+  margin: 15px 15px 15px 15px;
   
+}
+.icono-boton{
+  color:#FF9F76;
+  cursor: pointer;
+
+}
+.icono-boton:hover{
+  color: #000000;
+
 }

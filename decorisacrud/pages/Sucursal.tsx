@@ -4,6 +4,7 @@ import * as hiIcon from 'react-icons/hi';
 import * as mdIcon from 'react-icons/md';
 import * as biIcon from 'react-icons/bi';
 import * as aiIcon from 'react-icons/ai';
+
 import Navbar from '../Components/Navbar'
 import { Formik } from 'formik';
 
@@ -17,6 +18,7 @@ let Sucursales = [
 function Sucursal() {
   const [showEditarSucursal, setShowEditarSucursal] = useState(false)
   const [idSucursalEditar, setIdSucursalEditar] = useState('')
+  const [showFormCrearSucursal, setshowFormCrearSucursal] = useState(false)
 
   interface Sucursal {
     suc_nombre: string,
@@ -50,6 +52,13 @@ function Sucursal() {
     setShowEditarSucursal(false)
 
   }
+  const crearSucursal = async (values: Sucursal) => {
+    // se envia la info para crear
+    console.log(values.suc_direccion)
+    console.log(values.suc_nombre)
+    setshowFormCrearSucursal(false)
+
+  }
   traerSucursales()
   return (
     <>
@@ -60,8 +69,10 @@ function Sucursal() {
             <hiIcon.HiOfficeBuilding />
           </IconContext.Provider>
           <h1>Sucursales</h1>
+          
 
         </div>
+        <h2>Ubica la Sucursal que te quede mas cerca y visitanos</h2>
 
         <div className='flex flex-wrap'>
           {Sucursales.map((item, index) => {
@@ -144,9 +155,7 @@ function Sucursal() {
                     <label>Direccion</label>
                     <h2 className='text-base'>{item.suc_direccion}</h2>
                   </div>
-                  <biIcon.BiEditAlt onClick={() => { statusShowEditarSucursal(item.suc_direccion) }} className='hover:bg-black' color='FF9F76' size={'5rem'} />
-
-
+                  <biIcon.BiEditAlt onClick={() => { statusShowEditarSucursal(item.suc_direccion) }} className='icono-boton'  size={'5rem'} />
 
                 </div>
               )
@@ -155,8 +164,77 @@ function Sucursal() {
           }
 
 
+          <div className='sucursal-nuevo grid justify-items-center content-center'>
+            <mdIcon.MdOutlineAddBusiness onClick={() => { setshowFormCrearSucursal(true) }} className='icono-boton'  size={'9rem'} />
+            <h2 className='text-3xl font-bold'>Nueva Sucursal</h2>
+          </div>
+          {showFormCrearSucursal ?(
+            <div className='sucursal-form'>
+              <aiIcon.AiFillCloseCircle onClick={() => setshowFormCrearSucursal(false)} className='button-cerrar' />
+              <h3>Nueva Sucursal</h3>
+              
+                  <div className=' grid justify-items-center'>
+                    <Formik
+                      initialValues={{
+                        suc_nombre: '',
+                        suc_direccion: '',
+
+
+                      }}
+                      onSubmit={async (values) => {
+
+                        crearSucursal(values)
+
+
+                        //alert(JSON.stringify(values));
+
+                      }}
+
+                    >
+                      {({ handleSubmit, values, handleChange }) => (
+                        <form onSubmit={handleSubmit}>
+                          <div className=''>
+                            <div className="flex flex-nowrap items-center ">
+                              <label className="">Nombre:</label>
+                              <input name="suc_nombre" type="text" placeholder='nombre' className=""
+                                value={values.suc_nombre}
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className="flex flex-nowrap items-center ">
+                              <label className="">Direccion:</label>
+                              <input name="suc_direccion" type="text" placeholder='direccion' className=""
+                                value={values.suc_direccion}
+                                onChange={handleChange}
+                              />
+                            </div>
+                            <div className='flex flex-col justify-center items-center '>
+                              <button type="submit" className="button-mas "> Crear </button>
+                            </div>
+
+                          </div>
+
+
+
+
+                        </form>
+                      )}
+
+                    </Formik>
+
+
+                  </div>
+
+
+            </div>
+          ):null
+
+          }
+
 
         </div>
+
+        
 
 
 
