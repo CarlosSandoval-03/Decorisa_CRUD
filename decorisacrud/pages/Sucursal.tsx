@@ -27,6 +27,13 @@ function Sucursal() {
   }
   const traerSucursales = () => {
     // busca trae las sucursales
+    fetch('https://decorisaserver.azurewebsites.net/api/sucursal',{
+      mode:'no-cors'
+    })
+    .then(response =>{ 
+      console.log(JSON.stringify(response))
+    })
+    
     let sucursal = [
       {
         suc_direccion: 'Cr51 #134-14',
@@ -211,12 +218,7 @@ function Sucursal() {
                             <div className='flex flex-col justify-center items-center '>
                               <button type="submit" className="button-mas "> Crear </button>
                             </div>
-
                           </div>
-
-
-
-
                         </form>
                       )}
 
