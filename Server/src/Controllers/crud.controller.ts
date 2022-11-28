@@ -65,8 +65,11 @@ export function getElementByMultipleRowEquality(res: Response, { tableName, cond
 }
 
 export function createElement(res: Response, { tableName, object }: {tableName: string, object: any}): Response | void {
+  executeQuery('START TRANSACTION;')
+
   executeQuery(`INSERT INTO ${tableName} SET ?`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
+      executeQuery('COMMIT;')
       res.status(200)
       return res.json({
         message: `New entry in "${tableName}"`,
@@ -74,6 +77,7 @@ export function createElement(res: Response, { tableName, object }: {tableName: 
         state: rows
       })
     }
+    executeQuery('ROLLBACK;')
     res.status(500)
     return res.send({
       err: err
@@ -82,14 +86,17 @@ export function createElement(res: Response, { tableName, object }: {tableName: 
 }
 
 export function deleteElement(res: Response, { tableName, conditionRow, param }: {tableName: string, conditionRow: string, param: any}): Response | void {
+  executeQuery('START TRANSACTION;')
   executeQuery(`DELETE FROM ${tableName} WHERE ${conditionRow} = ?`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
+      executeQuery('COMMIT;')
       res.status(200)
       return res.json({
         message: `Entry with '${conditionRow}' = '${param}' deleted from '${tableName}'`,
         sqlReport: rows
       })
     }
+    executeQuery('ROLLBACK;')
     res.status(500)
     return res.send({
       err: err
@@ -106,15 +113,19 @@ export function deleteElementForMultipleRows(res: Response, { tableName, conditi
     })
   }
 
+  executeQuery('START TRANSACTION;')
+
   let query = `DELETE FROM ${tableName} ` + multipleParamsCondition;
   executeQuery(query, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
+      executeQuery('COMMIT;')
       res.status(200)
       return res.json({
         message: `Entry deleted from '${tableName}'`,
         sqlReport: rows
       })
     }
+    executeQuery('ROLLBACK;')
     res.status(500)
     return res.send({
       err: err
@@ -123,14 +134,17 @@ export function deleteElementForMultipleRows(res: Response, { tableName, conditi
 }
 
 export function updateElement(res: Response, { tableName, conditionRow, object, param }: {tableName: string, conditionRow: string, object: any, param: any}): Response | void {
+  executeQuery('START TRANSACTION;')
   executeQuery(`UPDATE ${tableName} SET ? WHERE ${conditionRow} = '${param}'`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
+      executeQuery('COMMIT;')
       res.status(200)
       return res.json({
         message: `Entry with '${conditionRow}' = '${param}', new value in ${tableName}`,
         sqlReport: rows
       })
     }
+    executeQuery('ROLLBACK;')
     res.status(500)
     return res.send({
       err: err
@@ -147,15 +161,19 @@ export function updateElementForMultipleRows(res: Response, { tableName, conditi
     })
   }
 
+  executeQuery('START TRANSACTION;')
+
   let query = `UPDATE ${tableName} SET ? ` + multipleParamsCondition;
   executeQuery(query, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
+      executeQuery('COMMIT;')
       res.status(200)
       return res.json({
         message: `Entry updated from '${tableName}'`,
         sqlReport: rows
       })
     }
+    executeQuery('ROLLBACK;')
     res.status(500)
     return res.send({
       err: err
