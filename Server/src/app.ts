@@ -1,4 +1,5 @@
 import express, { Application } from 'express'
+import cors from 'cors'
 import morgan from 'morgan'
 
 import AuthRoutes from './Routes/auth.routes'
@@ -37,6 +38,12 @@ export class App {
   }
 
   middlewares (): void {
+    const corsOptions ={
+      origin:'*',
+      credentials:true,            //access-control-allow-credentials:true
+      optionSuccessStatus:200,
+    }
+    this.app.use(cors(corsOptions))
     this.app.use(morgan('dev'))
     this.app.use(express.json())
   }
