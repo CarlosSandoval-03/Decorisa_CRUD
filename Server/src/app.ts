@@ -38,9 +38,14 @@ export class App {
   }
 
   middlewares (): void {
+    const corsOptions ={
+      origin:'*',
+      credentials:true,            //access-control-allow-credentials:true
+      optionSuccessStatus:200,
+    }
+    this.app.use(cors(corsOptions))
     this.app.use(morgan('dev'))
     this.app.use(express.json())
-    this.app.use(cors())
   }
 
   authRoutes (): void {
