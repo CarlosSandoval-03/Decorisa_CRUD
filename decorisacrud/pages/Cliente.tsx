@@ -179,7 +179,7 @@ function Cliente() {
 
                     ) : null}
                     <div className='Cliente grid justify-items-center'>
-                        <IconContext.Provider value={{ color: 'FF9F76', size: '5.5rem' , className:'btn-add-product'}}>
+                        <IconContext.Provider value={{  size: '5.5rem' , className:'icono-boton'}}>
                             <aiIcon.AiOutlineUserAdd onClick={()=>setShowFormCrearCliente(true)} />
                         </IconContext.Provider>
                         <h2 className='text-2xl'>Nuevo Cliente</h2>

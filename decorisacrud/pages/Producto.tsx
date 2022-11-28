@@ -3,12 +3,14 @@ import React from 'react'
 import { useState } from 'react'
 import Navbar from '../Components/Navbar'
 import * as ioIcon from 'react-icons/io';
+import * as aiIcon from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import * as faIcon from 'react-icons/fa';
+import Image from 'next/image';
 
 
 
-const Productos = [
+let Productos = [
     {
         pro_nombreId: 'Sheer Screen',
         pro_nombreEmpresa: 'Panorama',
@@ -35,7 +37,7 @@ const Productos = [
 
 function Producto() {
     const [showProduct, setShowProduct] = useState(false)
-    const [ShowFromCrearProducto, setShowFromCrearProducto] = useState(false)
+    const [ShowFormCrearProducto, setShowFormCrearProducto] = useState(false)
 
     interface initial {
 
@@ -45,13 +47,13 @@ function Producto() {
 
 
     }
-    interface Producto{
+    interface Producto {
 
-        pro_nombreId:string,
-        pro_nombreEmpresa:string,
-        pro_funcionamiento:string,
-        pro_precio:number,
-        pro_foto:string
+        pro_nombreId: string,
+        pro_nombreEmpresa: string,
+        pro_funcionamiento: string,
+        pro_precio: number,
+        pro_foto: string
     }
 
     const filtrarProductos = async (values: initial) => {
@@ -60,12 +62,13 @@ function Producto() {
         setShowProduct(true)
 
     }
-    
-    const crearProducto = async (values:Producto) => {
+
+    const crearProducto = async (values: Producto) => {
         // instruccion para mandar a la base
-        setShowFromCrearProducto(false)
+        setShowFormCrearProducto(false)
+        console.log(values.pro_foto)
     }
-    
+
     return (
 
         <>
@@ -150,22 +153,31 @@ function Producto() {
                                     <div className='grid  grid-cols-2'>
                                         <div className='col-start-1'>
                                             <div className='imagen'>
-                                                <h1>img</h1>
+
+                                                {/*<Image  src={item.pro_foto} alt='' width={136} height={172} src={item.pro_foto}></Image> */}
+                                                <img src={item.pro_foto}></img>
                                             </div>
                                         </div>
                                         <div className='col-start-2 pd-5'>
                                             <h1 className='text-2xl'>{item.pro_nombreId}</h1>
-                                            <h3>Marca:{item.pro_nombreEmpresa}</h3>
-                                            <h3>{item.pro_funcionamiento}</h3>
+                                            <div className='flex flex-wrap'>
+                                                <h3 className='text-base'>Marca:</h3>
+                                                <label>{item.pro_nombreEmpresa}</label>
+                                            </div>
+
+
+                                            <label>{item.pro_funcionamiento}</label>
                                             <div className='flex flex-nowrap items-center'>
-                                                <IconContext.Provider value={{ color: 'Black' ,size:'1.5rem'}}>
-                                                    <faIcon.FaMoneyBill  />
+                                                <IconContext.Provider value={{ color: 'Black', size: '1.5rem' }}>
+                                                    <faIcon.FaMoneyBill />
                                                 </IconContext.Provider>
 
-                                                <h2 className='text-amber-600'>Precio: {item.pro_precio}</h2>
+                                                <h3 className='text-2xl'>Precio m2:</h3>
+
 
                                             </div>
-                                            
+                                            <h2 className='font-bold'> {item.pro_precio}</h2>
+
                                         </div>
 
                                     </div>
@@ -182,21 +194,21 @@ function Producto() {
                     ) : null}
                     <div className='producto grid justify-items-center'>
 
-                        <IconContext.Provider value={{ color: 'FF9F76', size: '8rem', className: 'btn-add-product' }}>
-                            <ioIcon.IoMdAddCircle onClick={() => setShowFromCrearProducto(true)} />
+                        <IconContext.Provider value={{ size: '7rem', className: 'icono-boton' }}>
+                            <ioIcon.IoMdAddCircle onClick={() => setShowFormCrearProducto(true)} />
                         </IconContext.Provider>
-                        <h2>Nuevo Producto</h2>
+                        <h2 className='font-bold'>Nuevo Producto</h2>
 
                     </div>
-                    {ShowFromCrearProducto ? (
+                    {ShowFormCrearProducto ? (
                         <div className='formCrearPr '>
 
                             <Formik
                                 initialValues={{
-                                    pro_nombreId:'',
-                                    pro_nombreEmpresa:'',
-                                    pro_funcionamiento:'',
-                                    pro_precio:0,
+                                    pro_nombreId: '',
+                                    pro_nombreEmpresa: '',
+                                    pro_funcionamiento: '',
+                                    pro_precio: 0,
                                     pro_foto: ''
                                 }}
                                 onSubmit={async (values) => {
@@ -211,35 +223,45 @@ function Producto() {
                             >
                                 {({ handleSubmit, values, handleChange }) => (
                                     <form onSubmit={handleSubmit}>
-                                       
+                                        <div className='flex flex-wrap items-center'>
+                                            <aiIcon.AiFillCloseCircle onClick={() => setShowFormCrearProducto(false)} className='button-cerrar' />
+                                            <h3>Nuevo Productor</h3>
+                                        </div>
                                         <div className='grid grid-cols-2'>
-                                            <div className='col-star1-1'>
-                                                <div className="">
-                                                    <label className="">Nombre:</label>
+                                            <div className='col-start-1 '>
+                                                <div className="flex flex-wrap items-center">
+                                                    <div className='w-24'>
+                                                        <label className="">Nombre:</label>
+                                                    </div>
+
                                                     <input name="pro_nombreId" type="text" placeholder="Precio Minimo" className=""
                                                         value={values.pro_nombreId}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
-                                                <div className="">
+                                                <div className="flex flex-wrap items-center">
                                                     <label className="">Distribuidor:</label>
                                                     <input name="pro_nombreId" type="text" placeholder="Precio Minimo" className=""
                                                         value={values.pro_nombreEmpresa}
                                                         onChange={handleChange}
                                                     />
                                                 </div>
-                                                <div className="">
-                                                    <label className="">Precio:</label>
-                                                    <input name="pro_precio" type="number" placeholder="Precio Minimo" className=""
-                                                        value={values.pro_precio}
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
+
 
 
 
                                             </div>
                                             <div className='col-start-2'>
+                                                <div className="flex flex-wrap items-center">
+                                                    <div className='w-24'>
+                                                        <label className="">Precio:</label>
+                                                    </div>
+
+                                                    <input name="pro_precio" type="number" placeholder="Precio Minimo" className=""
+                                                        value={values.pro_precio}
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
                                                 <div className=" flex flex-nowrap items-center ">
                                                     <label >Funcionamiento:</label>
 
@@ -256,28 +278,23 @@ function Producto() {
                                                         <option value='Persiana'>Persiana</option>
                                                     </select>
                                                 </div>
-                                                <div className="">
-                                                    <label className="">Foto:</label>
-                                                    <input name="pro_ven_min" type="text" placeholder="Precio Minimo" className=""
-                                                        value={values.pro_foto}
-                                                        onChange={handleChange}
-                                                    />
+                                                <br></br>
+                                                <div className='grid place-items-end'>
+                                                    <button type="submit" className="button-detalles "> Crear </button>
                                                 </div>
 
 
                                             </div>
 
-                                            
-                                            
-                                            
-                                            <div className=' place-items-end'>
-                                                <button type="submit" className="button-detalles "> Buscar </button>
-                                            </div>
 
-                                            </div>
 
-                                        
-                                        
+
+
+
+                                        </div>
+
+
+
 
 
 
