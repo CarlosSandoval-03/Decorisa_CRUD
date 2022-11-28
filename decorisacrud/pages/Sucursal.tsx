@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IconContext } from 'react-icons';
 import * as hiIcon from 'react-icons/hi';
 import * as mdIcon from 'react-icons/md';
@@ -26,28 +26,17 @@ function Sucursal() {
 
   }
   const traerSucursales = () => {
+    let sucursal: { suc_direccion: string; suc_nombre: string; }[] = []
     // busca trae las sucursales
     fetch('https://decorisaserver.azurewebsites.net/api/sucursal',{
-      mode:'no-cors'
+      mode:'cors'
     })
-    .then(response =>{ 
-      console.log(JSON.stringify(response))
+    .then(response => response.json()).then(data => {
+      for (const obj of data) {
+        sucursal.push(obj)
+      }
+      console.log(sucursal)
     })
-    
-    let sucursal = [
-      {
-        suc_direccion: 'Cr51 #134-14',
-        suc_nombre: 'Decorisa Spring',
-      },
-      {
-        suc_direccion: 'Cr51 #135-14',
-        suc_nombre: 'Decorisa Spring',
-      },
-      {
-        suc_direccion: 'Cr51 #133-14',
-        suc_nombre: 'Decorisa Spring',
-      },
-    ]
     Sucursales = sucursal
   }
   const statusShowEditarSucursal = (direccion: string) => {
@@ -66,7 +55,9 @@ function Sucursal() {
     setshowFormCrearSucursal(false)
 
   }
-  traerSucursales()
+  useEffect(() => {
+    traerSucursales();
+  }, []);
   return (
     <>
       <Navbar></Navbar>
