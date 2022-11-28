@@ -1,4 +1,5 @@
 import express, { Application } from 'express'
+import cors from 'cors'
 import morgan from 'morgan'
 
 import AuthRoutes from './Routes/auth.routes'
@@ -39,6 +40,7 @@ export class App {
   middlewares (): void {
     this.app.use(morgan('dev'))
     this.app.use(express.json())
+    this.app.use(cors())
   }
 
   authRoutes (): void {
