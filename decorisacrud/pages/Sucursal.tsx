@@ -43,12 +43,12 @@ function Sucursal() {
   }
 
   const editarSucursal = (values: Sucursal) => {
-    let SucEditada = {
+    let    SucEditada = {
       'suc_direccion': values.suc_direccion,
       'suc_nombre': values.suc_nombre
     }
 
-    let id:string = values.suc_direccion.replaceAll(' ', '%20')
+    let id:string = idSucursalEditar.replaceAll(' ', '%20')
     id = id.replaceAll('#','%23')
 
     let url:string='https://decorisaserver.azurewebsites.net/api/sucursal/' + id

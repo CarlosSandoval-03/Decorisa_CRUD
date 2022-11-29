@@ -99,7 +99,7 @@ function Cliente() {
     }
     const mejoresClientes = () => {
 
-        //
+        setIsLoading(true)
         fetch('https://decorisaserver.azurewebsites.net/api/consultas/clientes_frecuentes', {
 
         })
