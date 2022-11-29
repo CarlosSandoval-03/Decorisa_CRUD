@@ -11,7 +11,7 @@ export function getProducerByCompanyName(req: Request, res: Response): Response 
   const obj = {
     tableName: 'productor',
     conditionRow: 'pro_nombreEmpresa',
-    param: req.params.document
+    param: req.params.companyName
   }
 
   return getElementByEquality(res, obj)
@@ -31,7 +31,7 @@ export function deleteProducerByCompanyName(req: Request, res: Response): Respon
   const obj = {
     tableName: 'productor',
     conditionRow: 'pro_nombreEmpresa',
-    param: req.params.document
+    param: req.params.companyName
   }
 
   return deleteElement(res, obj)
@@ -43,7 +43,7 @@ export function updateProducerByCompanyName(req: Request, res: Response): Respon
     tableName: 'productor',
     conditionRow: 'pro_nombreEmpresa',
     object: newProducer,
-    param: req.params.document
+    param: req.params.companyName
   }
 
   return updateElement(res,obj)
