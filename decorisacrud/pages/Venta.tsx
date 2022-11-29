@@ -195,38 +195,26 @@ function Venta() {
         setShowWindow(true);
         setIsLoading(false)
       })
-    
-
-
-
-    
-
   }
 
   const borrarVenta = (id: number): any => {
     setIdVenta(id);
     //llamar para que borre la venta con este id
     setIsLoading(true)
-    let src:string='https://decorisaserver.azurewebsites.net/api/venta/'+idVenta
+    let src:string='https://decorisaserver.azurewebsites.net/api/venta/' + idVenta
     console.log(src)
     fetch(src, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
-      },
-      
-
+      }
     })
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response))
       .then(() => {
         setIsLoading(false)
-        
-
       })
-   
-
 
   }
   const CrearVenta = async (values: initial) => {
@@ -234,7 +222,6 @@ function Venta() {
       ven_id: values.ven_id, cli_documento: values.cli_documento,
       ase_documento: values.ase_documento, ven_fecha: values.ven_fecha, ins_documento: values.ins_documento, ven_precio: values.ven_precio
     }
-   
     console.log(JSON.stringify(ventaCrear))
 
     fetch('https://decorisaserver.azurewebsites.net/api/venta', {
@@ -254,8 +241,6 @@ function Venta() {
         setHaveProducts(false)
         //guardar productos tambien
         setNumProducts(0)
-        
-
       })
       console.log(Productos)
       for(const obj of Productos){
@@ -275,14 +260,9 @@ function Venta() {
       .then(() => {
         
       })
-
       }
-      
-
-
-
   }
-  
+
   const guardarProductos = async (values: Product) => {
     setIsLoading(true)
     productCrear.push(values);
@@ -308,9 +288,7 @@ function Venta() {
     console.log(src)
 
 
-    fetch(src, {
-
-    })
+    fetch(src)
       .then(response => response.json()).then(data => {
         console.log('aaa')
         console.log(data[0])
