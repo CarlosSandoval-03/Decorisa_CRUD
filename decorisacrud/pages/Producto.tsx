@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Navbar from '../Components/Navbar'
 import * as ioIcon from 'react-icons/io';
@@ -10,34 +10,16 @@ import Image from 'next/image';
 
 
 
-let Productos = [
-    {
-        pro_nombreId: 'Sheer Screen',
-        pro_nombreEmpresa: 'Panorama',
-        pro_precio: 100000,
-        pro_funcionamiento: 'Enrrollable',
-        pro_foto: 'http//',
-    },
-    {
-        pro_nombreId: 'Sheer Screen',
-        pro_nombreEmpresa: 'Panorama',
-        pro_precio: 100000,
-        pro_funcionamiento: 'Enrrollable',
-        pro_foto: 'http//',
-    }
-    ,
-    {
-        pro_nombreId: 'Sheer Screen',
-        pro_nombreEmpresa: 'Panorama',
-        pro_precio: 100000,
-        pro_funcionamiento: 'Enrrollable',
-        pro_foto: 'http//',
-    }
-]
+let Productos: { pro_nombreId: string;
+    pro_nombreEmpresa: string;
+    pro_funcionamiento: string;
+    pro_precio: number;
+    pro_foto: string; }[] = []
 
 function Producto() {
     const [showProduct, setShowProduct] = useState(false)
     const [ShowFormCrearProducto, setShowFormCrearProducto] = useState(false)
+    const [isLoading, setIsLoading] =useState(true)
 
     interface initial {
 
@@ -59,6 +41,25 @@ function Producto() {
     const filtrarProductos = async (values: initial) => {
         setShowProduct(false)
         // buscar los datos la base de datos
+        let producto: { pro_nombreId: string;
+            pro_nombreEmpresa: string;
+            pro_funcionamiento: string;
+            pro_precio: number;
+            pro_foto: string; }[] = []
+        // busca trae las sucursales
+        let src:string='https://decorisaserver.azurewebsites.net/api/consultas/productos_intervalo/'+values.pro_ven_min+'&'+values.pro_ven_max
+        console.log(src)
+        fetch(src, {
+            mode: 'cors'
+        })
+            .then(response => response.json()).then(data => {
+                for (const obj of data) {
+                    producto.push(obj)
+                }
+                console.log(producto)
+            })
+        Productos = producto
+        setIsLoading(false)
         setShowProduct(true)
 
     }
@@ -68,7 +69,9 @@ function Producto() {
         setShowFormCrearProducto(false)
         console.log(values.pro_foto)
     }
-
+    if(isLoading==false){
+        
+    }
     return (
 
         <>
@@ -86,9 +89,9 @@ function Producto() {
                         pro_funcionamiento: 'Enrrollable'
                     }}
                     onSubmit={async (values) => {
-
-                        filtrarProductos(values)
-
+                        
+                        
+                            filtrarProductos(values);
 
                         //alert(JSON.stringify(values));
 
