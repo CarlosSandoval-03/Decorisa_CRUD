@@ -21,79 +21,76 @@ function Sucursal() {
     suc_direccion: string,
 
   }
-  
-  
 
-
-  const traerSucursales = async()=>{
-    
+  const traerSucursales = () =>{
     let sucursal: { suc_direccion: string; suc_nombre: string; }[] = []
     // busca trae las sucursales
-    fetch('https://decorisaserver.azurewebsites.net/api/sucursal', {
-      mode: 'cors'
-    })
-      .then(response => response.json()).then(data => {
+    fetch('https://decorisaserver.azurewebsites.net/api/sucursal')
+      .then(response => response.json())
+      .then(data => {
         for (const obj of data) {
           sucursal.push(obj)
         }
         console.log(sucursal)
+        setSucursales(sucursal)
+        setIsLoading(false)
       })
-    setSucursales(sucursal)
-    
-    
-    setIsLoading(false)
   }
-    
-  
 
   const statusShowEditarSucursal = (direccion: string) => {
     setShowEditarSucursal(true)
     setIdSucursalEditar(direccion)
   }
 
-  const editarSucursal = async (values: Sucursal) => {
-    let SucEditada={suc_nombre: values.suc_nombre,
-      suc_direccion: values.suc_direccion}
+  const editarSucursal = (values: Sucursal) => {
+    let SucEditada = {
+      'suc_direccion': values.suc_direccion,
+      'suc_nombre': values.suc_nombre
+    }
 
-    let id:string=values.suc_direccion.replaceAll(' ', '%20')
-    id=id.replaceAll('-','%23')
+    let id:string = values.suc_direccion.replaceAll(' ', '%20')
+    id = id.replaceAll('#','%23')
 
-    let url:string='https://decorisaserver.azurewebsites.net/api/sucursal/'+id
+    let url:string='https://decorisaserver.azurewebsites.net/api/sucursal/' + id
     console.log(url)
 
     setIsLoading(true)
     fetch(url, {
       method:'PUT',
-      body:JSON.stringify(SucEditada)
-
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(SucEditada)
     })
     .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-    
-    traerSucursales()
-    setShowEditarSucursal(false)
+    .then(response => console.log('Success:', response))
+    .then(() => {
+      traerSucursales()
+      setShowEditarSucursal(false)
+    })
 
   }
   const crearSucursal =  (values: Sucursal) => {
     // se envia la info para crear
-    let SucCrear={suc_nombre: values.suc_nombre,
-      suc_direccion: values.suc_direccion}
+    let SucCrear={suc_direccion: values.suc_direccion, suc_nombre: values.suc_nombre}
     console.log(JSON.stringify(SucCrear))
 
 
     setIsLoading(true)
     fetch('https://decorisaserver.azurewebsites.net/api/sucursal', {
       method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body:JSON.stringify(SucCrear)
-
     })
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-    
-    traerSucursales()
-    setshowFormCrearSucursal(false)
+    .then(response => console.log('Success:', response))
+    .then(() => {
+      traerSucursales()
+      setshowFormCrearSucursal(false)
+    })
 
   }
 
@@ -101,11 +98,10 @@ function Sucursal() {
     traerSucursales()
   }, []);
 
-  if (isLoading==false) {
+  if (!isLoading) {
     return (
     <>
       <Navbar></Navbar>
-
       <div className='pagina'>
         <h1></h1>
         <div className='flex flex-wrap'>
@@ -117,7 +113,6 @@ function Sucursal() {
         <h2>Ubica la Sucursal que te quede mas cerca y visitanos</h2>
 
         <div className='flex flex-wrap'>
-          
           {Sucursales.map((item, index) => {
             if (item.suc_direccion == idSucursalEditar && showEditarSucursal == true) {
               return (
@@ -185,9 +180,7 @@ function Sucursal() {
 
 
               return (
-                
                 <div key={index} className='sucursal grid justify-items-center'>
-                  
                   <div className='circulo   grid justify-items-center'>
                     <mdIcon.MdPlace color='FFEEDF' size={'6rem'} />
                   </div>
@@ -204,7 +197,6 @@ function Sucursal() {
           })
           }
 
-
           <div className='sucursal-nuevo grid justify-items-center content-center'>
             <mdIcon.MdOutlineAddBusiness onClick={() => { setshowFormCrearSucursal(true) }} className='icono-boton' size={'9rem'} />
             <h2 className='text-3xl font-bold'>Nueva Sucursal</h2>
@@ -213,24 +205,16 @@ function Sucursal() {
             <div className='sucursal-form'>
               <aiIcon.AiFillCloseCircle onClick={() => setshowFormCrearSucursal(false)} className='button-cerrar' />
               <h3>Nueva Sucursal</h3>
-
               <div className=' grid justify-items-center'>
                 <Formik
                   initialValues={{
                     suc_nombre: '',
                     suc_direccion: '',
-
-
                   }}
                   onSubmit={async (values) => {
-
                     crearSucursal(values)
-
-
                     //alert(JSON.stringify(values));
-
                   }}
-
                 >
                   {({ handleSubmit, values, handleChange }) => (
                     <form onSubmit={handleSubmit}>
@@ -255,33 +239,15 @@ function Sucursal() {
                       </div>
                     </form>
                   )}
-
                 </Formik>
-
-
               </div>
-
-
             </div>
           ) : null
-
           }
-
-
         </div>
-
-
-
-
-
-
       </div>
     </>
-
   )
-    
-
-
   }
 
 }
