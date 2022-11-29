@@ -7,27 +7,7 @@ import { IconContext } from 'react-icons';
 
 
 
-const rowData=[
-  {
-    idVenta:1212312,
-    Cliente:'Juanda',
-    precio:100000,
-    detalles:'boton-detalles'
-  },
-  {
-    idVenta:111312,
-    Cliente:'Carlos',
-    precio:13000,
-    detalles:'boton-detalles'
-  },
-  {
-    idVenta:1212312,
-    Cliente:'Gianka',
-    precio:20000,
-    detalles:'boton-detalles'
-  },
 
-]
 
 const Clientes=[
   {
@@ -93,13 +73,15 @@ function Venta() {
     vip_cantidad:number,
   }
   
+  
   let proArray:Product[]= new Array<Product>
   interface initial{
-      
+
+    ven_id:number,
     cli_Documento:number,
     ase_Documento:number,
-    ins_Documento:number,
     ven_fecha:string,
+    ins_Documento:number,
     ven_precio:number,
     
     
@@ -110,6 +92,13 @@ function Venta() {
     fecha_fin:string
     
   }
+  interface PartOfVent{
+      
+    ven_id:number,
+    cli_nombreCompleto:string
+    ven_precio:number
+    
+  }
 
 
   const [showWindow, setShowWindow]= useState(false)
@@ -118,6 +107,13 @@ function Venta() {
   const [showProducts, setShowProducts]=useState(false)
   const [numProducts, setNumProducts]=useState(0)
   const [haveProducts, setHaveProducts]=useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [infoVentas, setInfoVentas] = useState([{
+    ven_id:0,
+    cli_nombreCompleto:'',
+    ven_precio:0,
+    
+  }])
 
   const stateShowWindow= (id:number):any=> {
     setIdVenta(id);
@@ -130,10 +126,36 @@ function Venta() {
     
   }
   const guardarInfo = async (values:initial) =>{
-    setShowForm(false)
-    setShowProducts(false)
-    setHaveProducts(false)
-    setNumProducts(0)
+
+    
+    
+    let ventaCrear:initial={ven_id:values.ven_id, cli_Documento:values.cli_Documento, 
+      ase_Documento:values.ase_Documento, ven_fecha:values.ven_fecha, ins_Documento:values.ins_Documento, ven_precio:values.ven_precio}
+    console.log(JSON.stringify(ventaCrear))
+
+
+    setIsLoading(true)
+    fetch('https://decorisaserver.azurewebsites.net/api/venta', {
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body:JSON.stringify(ventaCrear)
+
+    })
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+    .then(response => console.log('Success:', response))
+    .then(()=>{
+      setShowForm(false)
+      setShowProducts(false)
+      setHaveProducts(false)
+      //guardar productos tambien
+      setNumProducts(0)
+
+    })
+    
+    
 
   }
   const guardarProductos = async (values:Product) =>{
@@ -143,9 +165,32 @@ function Venta() {
     setHaveProducts(true)
   }
 
-  const getDates=async (values:Fechas)=>{
-    console.log(values.fecha_fin)
-    console.log(values.fecha_inicio)
+  const TraerVentas=async (values:Fechas)=>{
+    setIsLoading(true)
+    let ventas: { ven_id:number,
+      cli_nombreCompleto:string,
+      ven_precio:number }[] = []
+    // busca trae las sucursales
+    let fechai=values.fecha_inicio.replaceAll('/','-')
+    let fechaf=values.fecha_fin.replaceAll('/','-')
+    
+    let src:string='https://decorisaserver.azurewebsites.net/api/procedimientos/ventas_rango/'+fechai+'&'+fechaf
+    console.log(src)
+    let ve:PartOfVent[]= new Array<PartOfVent>
+
+    fetch(src, {
+      
+    })
+      .then(response => response.json()).then(data => {
+        console.log('aaa')
+        console.log(data[0])
+        
+        setInfoVentas(data[0])
+        
+
+        setIsLoading(false)
+      })
+    
   }
   
   const colorFondo= (a:number):string=> {
@@ -156,9 +201,9 @@ function Venta() {
     }
   }
 
-  
 
 
+if(isLoading==false){
   return (
     <>
         <Navbar></Navbar>
@@ -193,6 +238,7 @@ function Venta() {
                 {/* Formulario de creacion de venta */}
               <Formik
           initialValues={{
+            ven_id:0,
             cli_Documento:0,
             ase_Documento:0,
             ins_Documento:0,
@@ -217,7 +263,13 @@ function Venta() {
             
               
                 
-                
+                <div className="flex flex-nowrap items-center ">
+                    <label className ="">IdVenta:</label>
+                    <input name="ven_id" type="number" placeholder ="" className=""
+                    value={values.ven_id}
+                    onChange={handleChange}
+                    />
+                </div>
                 <div className="flex flex-nowrap items-center">
                     <label className ="">Cliente</label>
                     <select
@@ -472,15 +524,15 @@ function Venta() {
                       </tr>
                     
                     
-                      {rowData.map((item,index)=>{
+                      {infoVentas.map((item,index)=>{
                       return(
                         <><tr key={index}className={colorFondo(index)}>
-                          <td >{item.idVenta}</td>
-                          <td>{item.Cliente}</td>
-                          <td>{item.precio}</td>
-                          <td>{item.precio}</td>
-                          <td>{item.precio}</td>
-                          <td>{item.precio}</td>
+                          <td >{item.ven_id}</td>
+                          <td>{item.cli_nombreCompleto}</td>
+                          <td>{item.ven_precio}</td>
+                          <td>{item.ven_precio}</td>
+                          <td>{item.ven_precio}</td>
+                          <td>{item.ven_precio}</td>
                     
         
                         </tr><>
@@ -506,7 +558,7 @@ function Venta() {
                     }}
                     onSubmit={async (values) => {
 
-                        getDates(values)
+                        TraerVentas(values)
 
 
                         //alert(JSON.stringify(values));
@@ -559,21 +611,21 @@ function Venta() {
               <th>Precio</th>
               <th>Detalle</th>
             </tr>
-            {rowData.map((item,index)=>{
+            {infoVentas.map((item,index)=>{
               return(
                 <>
                 <tr key={index} className={colorFondo(index)} >
                   <td className='w-48'>
-                  <button  className='button-eliminar' onClick={()=>{borrarVenta(item.idVenta)}}>
+                  <button  className='button-eliminar' onClick={()=>{borrarVenta(item.ven_id)}}>
                     <h2 className='fond-bold'>Eliminar</h2>
                     
                     </button>
-                    {item.idVenta}</td>
-                  <td className='w-72'>{item.Cliente}</td>
-                  <td className='w-36'>{item.precio}</td>
+                    {item.ven_id}</td>
+                  <td className='w-72'>{item.cli_nombreCompleto}</td>
+                  <td className='w-36'>{item.ven_precio}</td>
                   <td className='detalles w-32'>
 
-                    <button  className='button-detalles' onClick={()=>{stateShowWindow(item.idVenta)
+                    <button  className='button-detalles' onClick={()=>{stateShowWindow(item.ven_id)
                     
                     }}>
                     <h2 className='fond-bold'>Detalles</h2>
@@ -606,5 +658,11 @@ function Venta() {
     
   )
 }
+  
+}
 
 export default Venta
+
+function then(arg0: () => void) {
+  throw new Error('Function not implemented.');
+}

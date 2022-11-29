@@ -19,7 +19,8 @@ let Productos: { pro_nombreId: string;
 function Producto() {
     const [showProduct, setShowProduct] = useState(false)
     const [ShowFormCrearProducto, setShowFormCrearProducto] = useState(false)
-    const [isLoading, setIsLoading] =useState(true)
+    const [isLoading, setIsLoading] = useState(false)
+    
 
     interface initial {
 
@@ -59,19 +60,35 @@ function Producto() {
                 console.log(producto)
             })
         Productos = producto
-        setIsLoading(false)
+        
         setShowProduct(true)
 
     }
 
     const crearProducto = async (values: Producto) => {
-        // instruccion para mandar a la base
+        let prodCrear={pro_nombreId: values.pro_nombreId,
+            pro_nombreEmpresa: values.pro_nombreEmpresa,
+            pro_funcionamiento: values.pro_funcionamiento,
+            pro_precio: values.pro_precio,
+            pro_foto: ''}
+          console.log(JSON.stringify(prodCrear))
+      
+      
+          setIsLoading(true)
+          fetch('https://decorisaserver.azurewebsites.net/api/producto', {
+            method:'POST',
+            body:JSON.stringify(prodCrear)
+      
+          })
+          .then(res => res.json())
+          .catch(error => console.error('Error:', error))
+          .then(response => console.log('Success:', response));
+
+        setIsLoading(false)
         setShowFormCrearProducto(false)
         console.log(values.pro_foto)
     }
-    if(isLoading==false){
-        
-    }
+   if(isLoading==false){
     return (
 
         <>
@@ -244,7 +261,7 @@ function Producto() {
                                                 </div>
                                                 <div className="flex flex-wrap items-center">
                                                     <label className="">Distribuidor:</label>
-                                                    <input name="pro_nombreId" type="text" placeholder="Precio Minimo" className=""
+                                                    <input name="pro_nombreEmpresa" type="text" placeholder="Precio Minimo" className=""
                                                         value={values.pro_nombreEmpresa}
                                                         onChange={handleChange}
                                                     />
@@ -321,6 +338,10 @@ function Producto() {
 
         </>
     )
-}
+   }
+        
+    }
+    
+
 
 export default Producto
