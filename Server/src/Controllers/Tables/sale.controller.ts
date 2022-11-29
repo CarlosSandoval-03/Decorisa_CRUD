@@ -11,7 +11,7 @@ export function getSaleById(req: Request, res: Response): Response | void {
   const obj = {
     tableName: 'venta',
     conditionRow: 'ven_id',
-    param: req.params.document
+    param: req.params.id
   }
 
   return getElementByEquality(res, obj)
@@ -31,7 +31,7 @@ export function deleteSaleById(req: Request, res: Response): Response | void {
   const obj = {
     tableName: 'venta',
     conditionRow: 'ven_id',
-    param: req.params.document
+    param: req.params.id
   }
 
   return deleteElement(res, obj)
@@ -43,7 +43,7 @@ export function updateSaleById(req: Request, res: Response): Response | void {
     tableName: 'venta',
     conditionRow: 'ven_id',
     object: newSale,
-    param: req.params.document
+    param: req.params.id
   }
 
   return updateElement(res,obj)
