@@ -48,3 +48,13 @@ export function updateAdviserByDocument(req: Request, res: Response): Response |
 
   return updateElement(res,obj)
 }
+
+// Indice
+export function getAdviserByName(req: Request, res: Response): Response | void {
+  const obj = {
+    tableName: 'asesor',
+    conditionRow: 'ase_nombreCompleto',
+    param: req.params.ase_nombreCompleto
+  }
+  return getElementByEquality(res, obj)
+}

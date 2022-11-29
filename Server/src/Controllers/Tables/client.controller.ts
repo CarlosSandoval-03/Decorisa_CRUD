@@ -48,3 +48,14 @@ export function updateClientByDocument(req: Request, res: Response): Response | 
 
   return updateElement(res,obj)
 }
+
+// Indice
+export function getClientByName(req: Request, res: Response): Response | void {
+  const obj = {
+    tableName: 'cliente',
+    conditionRow: 'cli_nombreCompleto',
+    param: req.params.cli_nombreCompleto
+  }
+
+  return getElementByEquality(res, obj)
+}

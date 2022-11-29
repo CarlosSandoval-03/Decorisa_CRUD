@@ -68,3 +68,14 @@ export function updateProductByPrimaryKey(req: Request, res: Response): Response
 
   return updateElementForMultipleRows(res, obj)
 }
+
+// Indice
+export function getProductByFunc(req: Request, res: Response): Response | void {
+  const obj = {
+    tableName: 'producto',
+    conditionRow: 'pro_funcionamiento',
+    param: req.params.pro_funcionamiento
+  }
+
+  return getElementByEquality(res, obj)
+}
