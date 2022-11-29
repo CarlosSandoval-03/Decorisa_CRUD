@@ -1,0 +1,30 @@
+{
+  "name": "decorisacrud",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/react-dom": "18.0.8",
+    "eslint": "8.27.0",
+    "eslint-config-next": "13.0.3",
+    "formik": "^2.2.9",
+    "graphql-request": "^5.0.0",
+    "next": "13.0.3",
+    "react-icons": "^4.6.0",
+    "react-table": "^7.8.0",
+    "typescript": "4.8.4"
+  },
+  "devDependencies": {
+    "@types/react-table": "^7.7.12",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.19",
+    "tailwindcss": "^3.2.4"
+  }
+}

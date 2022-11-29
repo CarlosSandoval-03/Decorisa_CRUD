@@ -1,5 +1,7 @@
-# Created by https://www.toptal.com/developers/gitignore/api/react,reactnative,node,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=react,reactnative,node,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/node,react,reactnative,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,react,reactnative,visualstudiocode
+
+.deployment
 
 ### Node ###
 # Logs
@@ -349,12 +351,8 @@ google-services.json
 *.hprof
 
 ### VisualStudioCode ###
+.vscode/
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/*.code-snippets
 
 # Local History for Visual Studio Code
 .history/
@@ -367,10 +365,4 @@ google-services.json
 .history
 .ionide
 
-# Support for Project snippet scope
-.vscode/*.code-snippets
-
-# Ignore code-workspaces
-*.code-workspace
-
-# End of https://www.toptal.com/developers/gitignore/api/react,reactnative,node,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/node,react,reactnative,visualstudiocode
