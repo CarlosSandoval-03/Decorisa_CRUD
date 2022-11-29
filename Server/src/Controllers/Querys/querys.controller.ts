@@ -137,7 +137,7 @@ export function getAverageDeliveryOfOrder(_req: Request, res: Response): Respons
 }
 
 export function getMostFrequentClient(_req: Request, res: Response): Response | void {
-  executeQuery('SELECT cli_nombreCompleto, COUNT(ven_id) AS Num_compras FROM CLIENTE NATURAL JOIN VENTA GROUP BY cli_Documento;', function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery('SELECT cli_nombreCompleto, COUNT(ven_id) AS Num_compras FROM CLIENTE NATURAL JOIN VENTA GROUP BY cli_Documento ORDER BY COUNT(ven_id) DESC LIMIT 3;', function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
