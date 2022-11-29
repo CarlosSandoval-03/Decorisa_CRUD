@@ -11,7 +11,7 @@ export function getOrderById(req: Request, res: Response): Response | void {
   const obj = {
     tableName: 'pedido',
     conditionRow: 'ped_id',
-    param: req.params.document
+    param: req.params.id
   }
 
   return getElementByEquality(res, obj)
@@ -31,7 +31,7 @@ export function deleteOrderById(req: Request, res: Response): Response | void {
   const obj = {
     tableName: 'pedido',
     conditionRow: 'ped_id',
-    param: req.params.document
+    param: req.params.id
   }
 
   return deleteElement(res, obj)
@@ -43,7 +43,7 @@ export function updateOrderById(req: Request, res: Response): Response | void {
     tableName: 'pedido',
     conditionRow: 'ped_id',
     object: newOrder,
-    param: req.params.document
+    param: req.params.id
   }
 
   return updateElement(res,obj)
