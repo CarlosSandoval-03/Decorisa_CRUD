@@ -153,8 +153,12 @@ function Cita() {
     
     setIsLoading(true)
     let citaCrear:Citas={
-      cli_documento:values.cli_documento, ase_documento:values.ase_documento, cit_fecha:values.cit_fecha, cit_direccion:values.cit_direccion
+      cli_documento:values.cli_documento,
+      ase_documento:values.ase_documento,
+      cit_fecha:values.cit_fecha.slice(0, 19).replace('T', ' '),
+      cit_direccion:values.cit_direccion
     }
+    console.log(citaCrear)
     fetch('https://decorisaserver.azurewebsites.net/api/cita', {
       method: 'POST',
       headers: {
