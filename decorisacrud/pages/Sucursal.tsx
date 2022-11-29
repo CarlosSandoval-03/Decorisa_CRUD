@@ -42,47 +42,55 @@ function Sucursal() {
     setIdSucursalEditar(direccion)
   }
 
-  const editarSucursal = async (values: Sucursal) => {
-    let SucEditada={suc_nombre: values.suc_nombre,
-      suc_direccion: values.suc_direccion}
+  const editarSucursal = (values: Sucursal) => {
+    let SucEditada = {
+      'suc_direccion': values.suc_direccion,
+      'suc_nombre': values.suc_nombre
+    }
 
-    let id:string=values.suc_direccion.replaceAll(' ', '%20')
-    id=id.replaceAll('#','%23')
+    let id:string = values.suc_direccion.replaceAll(' ', '%20')
+    id = id.replaceAll('#','%23')
 
-    let url:string='https://decorisaserver.azurewebsites.net/api/sucursal/'+id
+    let url:string='https://decorisaserver.azurewebsites.net/api/sucursal/' + id
     console.log(url)
 
     setIsLoading(true)
     fetch(url, {
       method:'PUT',
-      body:JSON.stringify(SucEditada)
-
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(SucEditada)
     })
     .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-
-    traerSucursales()
-    setShowEditarSucursal(false)
+    .then(response => console.log('Success:', response))
+    .then(() => {
+      traerSucursales()
+      setShowEditarSucursal(false)
+    })
 
   }
   const crearSucursal =  (values: Sucursal) => {
     // se envia la info para crear
-    let SucCrear={suc_nombre: values.suc_nombre,
-      suc_direccion: values.suc_direccion}
+    let SucCrear={suc_direccion: values.suc_direccion, suc_nombre: values.suc_nombre}
     console.log(JSON.stringify(SucCrear))
 
 
     setIsLoading(true)
     fetch('https://decorisaserver.azurewebsites.net/api/sucursal', {
       method:'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body:JSON.stringify(SucCrear)
     })
     .then(res => res.json())
     .catch(error => console.error('Error:', error))
-    .then(response => console.log('Success:', response));
-    traerSucursales()
-    setshowFormCrearSucursal(false)
+    .then(response => console.log('Success:', response))
+    .then(() => {
+      traerSucursales()
+      setshowFormCrearSucursal(false)
+    })
 
   }
 
