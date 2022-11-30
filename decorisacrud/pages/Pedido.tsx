@@ -176,9 +176,10 @@ function Pedido() {
 
   }
   const filtrarPedidos = async (values: Fechas) => {
-    console.log('entre1')
+    
     if (values.Pendiente.toString() == 'true') {
-      console.log('entre2')
+      console.log('entre1')
+      console.log(values.ped_mes)
       setIsLoading(true)
       fetch('https://decorisaserver.azurewebsites.net/api/vistas/pedidos_pendientes')
         .then(response => response.json())
@@ -190,11 +191,28 @@ function Pedido() {
         })
 
     } else {
+      console.log('entre2')
+      
+      setIsLoading(true)
+      let fecha:string=(values.ped_mes.split('-',2))[1]
+      console.log(fecha)
+      let url:string='https://decorisaserver.azurewebsites.net/api/consultas/pedidos_mes/'+fecha
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+          setrPedidos(data)
+          console.log(Pedidos)
+          setIsLoading(false)
+
+        })
+      
+      
+
 
 
     }
-    console.log(values.ped_mes)
-    console.log(values.Pendiente)
+    
 
     //enviar fechas
   }

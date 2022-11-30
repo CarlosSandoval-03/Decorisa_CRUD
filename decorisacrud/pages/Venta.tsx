@@ -114,11 +114,11 @@ function Venta() {
     vip_prod_alto: 0,
     vip_cantidad: 0,
   }])
-  const [Ingresos, setIngresos] = useState({
-    dinero:0
-  })
+  const [Ingresos, setIngresos] = useState([{
+    resultado:0
+  }])
   const [Rentabilidad, setRentabilidad] = useState([{
-    dinero:0
+    resultado:0
   }])
 
 
@@ -207,7 +207,7 @@ function Venta() {
     setIdVenta(id);
     //llamar para que borre la venta con este id
     setIsLoading(true)
-    let src:string='https://decorisaserver.azurewebsites.net/api/venta/' + idVenta
+    let src:string='https://decorisaserver.azurewebsites.net/api/venta/' + id
     console.log(src)
     fetch(src, {
       method: 'DELETE',
@@ -308,9 +308,10 @@ function Venta() {
         console.log('Ingresos')
         console.log(data)
         setIngresos(data)
-        console.log(Ingresos)
+        console.log(Ingresos[0].resultado)
         
       })
+
       let src3: string = 'https://decorisaserver.azurewebsites.net/api/funciones/rentabilidad/' + fechai + '&' + fechaf
       fetch(src3)
       .then(response => response.json()).then(data => {
@@ -786,19 +787,19 @@ function Venta() {
 
           </div>
 
-          <div className='flex flex-wrap '>
+          <div className='flex flex-wrap mt-10'>
             <div className='mr-10'>
-              <h2 className='text-2xl font-bold grid justify-items-center mt-10'>Ingresos</h2>
-              <div className='circuloRent grid justify-items-center'>
+              
+              <div className='circuloRent grid justify-items-center items-center'>
               <h2 className='text-2xl font-bold'>Ingresos</h2>
-              <h2 className='text-2xl font-bold'>{Ingresos.dinero}</h2>
+              <h2 className='text-2xl font-bold'>{Ingresos[0].resultado}</h2>
               </div>
             </div>
             <div>
-              <h2 className='text-2xl font-bold grid justify-items-center mt-10'>Rentabilidad</h2>
-              <div className='circuloRent grid justify-items-center'>
+              
+              <div className='circuloRent grid justify-items-center items-center'>
                 <h2 className='text-2xl font-bold'>Rentabilidad</h2>
-                <h2 className='text-2xl font-bold'>{Rentabilidad[0].dinero}</h2>
+                <h2 className='text-2xl font-bold'>{Rentabilidad[0].resultado}</h2>
               </div>
             </div>
           </div>
