@@ -211,9 +211,9 @@ function Cita() {
     
   }
   const editarCita=(values: Citas)=>{
-    
+    values.cit_fecha = values.cit_fecha.slice(0, 19).replace('T', ' ')
     console.log(JSON.stringify(values))
-    let url:string='https://decorisaserver.azurewebsites.net/api/cita/key/'+idCita[0].cit_fecha+':00.000Z'+'&'+idCita[0].ase_documento+'&'+idCita[0].cli_documento 
+    let url:string='https://decorisaserver.azurewebsites.net/api/cita/key/'+idCita[0].cit_fecha.slice(0, 19).replace('T', ' ') +'&'+idCita[0].ase_documento+'&'+idCita[0].cli_documento
     console.log(url)
     setIsLoading(true)
     fetch(url, {
