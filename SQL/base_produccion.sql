@@ -350,7 +350,7 @@ Drop procedure if exists Ventas_in_range;
 DELIMITER $$
 Create procedure Ventas_in_range(In Venta_1 date, Venta_2 date)
 BEGIN
-  Select ven_id, cli_nombreCompleto, ven_precio from VENTA natural join CLIENTE where ven_fecha Between Venta_1 and Venta_2;
+  Select ven_id, cli_nombreCompleto, ven_precio from VENTA natural join CLIENTE where (ven_fecha Between Venta_1 and Venta_2) or (ven_fecha = Venta_1) or (ven_fecha = Venta_2);
 END $$
 DELIMITER ;
 
