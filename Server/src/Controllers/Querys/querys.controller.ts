@@ -84,8 +84,8 @@ export function getOrderPerProducer(req: Request, res: Response): Response | voi
       month = '0' + parseInt(req.params.month.split("&").flat()[0])
   }
 
-  executeQuery(`SELECT PRODUCTOR.pro_nombreEmpresa, COUNT(ped_id) AS Num_pedidos FROM PRODUCTOR NATURAL JOIN PEDIDO NATURAL
-                  JOIN VENTA WHERE VENTA.ven_fecha like ? GROUP BY PRODUCTOR.pro_nombreEmpresa;`, function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery(`SELECT * FROM PRODUCTOR NATURAL JOIN PEDIDO NATURAL
+                  JOIN VENTA WHERE VENTA.ven_fecha like ?;`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
