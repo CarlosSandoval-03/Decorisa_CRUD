@@ -1,6 +1,6 @@
 # Decorisa_CRUD
 
-- [Decorisa_CRUD](#decorisa_crud)
+- [Decorisa\_CRUD](#decorisa_crud)
   - [Descripción Minimundo a modelar](#descripción-minimundo-a-modelar)
   - [Diagrama E/R del minimundo](#diagrama-er-del-minimundo)
   - [Modelo Relacional](#modelo-relacional)
@@ -16,9 +16,10 @@
     - [Productor](#productor)
     - [Producto](#producto)
     - [Venta](#venta)
-    - [Venta_Incluye_Producto](#venta_incluye_producto)
+    - [Venta\_Incluye\_Producto](#venta_incluye_producto)
   - [Matriz Perfiles](#matriz-perfiles)
   - [Consultas AR](#consultas-ar)
+  - [Wireframes](#wireframes)
 
 ## Descripción Minimundo a modelar
 
@@ -225,3 +226,7 @@ Descripción: Representa las especificaciones de los productos que puede tener u
      ![γ AVG(Periodo_entrega) → Prom_Periodo_entrega (π DATEDIFF(ped_fechaEntrega, ped_fechaEnvio) → Periodo_entrega) → PEDIDO](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/9.png "γ AVG(Periodo_entrega) → Prom_Periodo_entrega (π DATEDIFF(ped_fechaEntrega, ped_fechaEnvio) → Periodo_entrega) → PEDIDO")
 - 10. Clientes mas frecuentes en compras
       ![γ cli_nombreCompleto ; COUNT(ven_id) → Num_compras (CLIENTE join VENTA)](https://raw.githubusercontent.com/CarlosSandoval-03/Decorisa_CRUD/main/src/consultas/10.png "γ cli_nombreCompleto ; COUNT(ven_id) → Num_compras (CLIENTE join VENTA)")
+
+## Wireframes
+
+Link al [diseño en figma](https://www.figma.com/file/P39TqQ93O7MD8Me35VqYzN/Decorisa?node-id=0%3A1&t=zTioDfQjr2Xi84va-1)
