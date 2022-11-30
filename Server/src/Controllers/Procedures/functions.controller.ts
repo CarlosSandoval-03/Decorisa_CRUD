@@ -22,7 +22,7 @@ export function getCostSales(req: Request, res: Response): Response | void {
 }
 
 export function getCostSalesInterval(req: Request, res: Response): Response | void {
-  executeQuery(`SELECT Ventas_in_range(?, ?);`, function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery(`SELECT Valor_ventas_in_range(?, ?);`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
