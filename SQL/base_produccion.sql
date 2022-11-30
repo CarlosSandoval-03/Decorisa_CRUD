@@ -350,7 +350,7 @@ Drop procedure if exists Ventas_in_range;
 DELIMITER $$
 Create procedure Ventas_in_range(In Venta_1 date, Venta_2 date)
 BEGIN
-  Select ven_id, cli_nombreCompleto, ven_precion from VENTA natural join CLIENTE where ven_fecha Between Venta_1 and Venta_2;
+  Select ven_id, cli_nombreCompleto, ven_precio from VENTA natural join CLIENTE where (ven_fecha Between Venta_1 and Venta_2) or (ven_fecha = Venta_1) or (ven_fecha = Venta_2);
 END $$
 DELIMITER ;
 
@@ -368,7 +368,7 @@ Drop procedure if exists Detalles_venta;
 DELIMITER $$
 Create procedure Detalles_venta(In IdVenta int)
 BEGIN	
-	Select ven_id, cli_nombreCompleto, ase_nombreCompleto, ven_fecha, ins_nombreCompleto, ven_precion from VENTA natural join CLIENTE natural join ASESOR natural join INSTALADOR where ven_id = IdVenta;
+	Select ven_id, cli_nombreCompleto, ase_nombreCompleto, ven_fecha, ins_nombreCompleto, ven_precio from VENTA natural join CLIENTE natural join ASESOR natural join INSTALADOR where ven_id = IdVenta;
 END $$
 DELIMITER ;
 
@@ -388,7 +388,7 @@ DELIMITER $$
 Create function VentastotalMes(Mes Varchar(100)) returns Int deterministic
 BEGIN
 	Declare Ventas int Default 0;
-	Select Sum(ven_precion) into Ventas from VENTA where ven_fecha like Concat('%-',Mes,'-%');
+	Select Sum(ven_precio) into Ventas from VENTA where ven_fecha like Concat('%-',Mes,'-%');
     return Ventas;
 END $$
 DELIMITER ;
@@ -399,7 +399,7 @@ DELIMITER $$
 Create function Valor_ventas_in_range(Venta_1 date, Venta_2 date) returns Int deterministic
 BEGIN	
 	Declare Valor_Ventas int Default 0;
-	Select sum(ven_precion) into Valor_Ventas from VENTA where ven_fecha Between Venta_1 and Venta_2;
+	Select sum(ven_precio) into Valor_Ventas from VENTA where ven_fecha Between Venta_1 and Venta_2;
     return Valor_Ventas;
 END $$
 DELIMITER ;
@@ -411,7 +411,7 @@ Create function Rentabiliades(Venta_1 date, Venta_2 date) returns Int determinis
 BEGIN
     Declare Precios_Ventas int Default 0;
     Declare Precios_Pedidos int Default 0;
-    Select sum(ven_precion) into Precios_Ventas from VENTA where ven_fecha Between Venta_1 and Venta_2;
+    Select sum(ven_precio) into Precios_Ventas from VENTA where ven_fecha Between Venta_1 and Venta_2;
     Select sum(ped_costoPed) into Precios_Pedidos from VENTA natural join PEDIDO where ven_fecha Between Venta_1 and Venta_2;
     Set @Rentabilidad = Precios_Ventas - Precios_Pedidos;
     return @Rentabiliad;

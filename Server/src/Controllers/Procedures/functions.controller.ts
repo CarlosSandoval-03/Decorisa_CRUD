@@ -9,7 +9,7 @@ export function getCostSales(req: Request, res: Response): Response | void {
       month = '0' + parseInt(req.params.month.split("&").flat()[0])
   }
 
-  executeQuery(`SELECT VentastotalMes(?);`, function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery(`SELECT VentastotalMes(?) AS resultado;`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
@@ -22,7 +22,7 @@ export function getCostSales(req: Request, res: Response): Response | void {
 }
 
 export function getCostSalesInterval(req: Request, res: Response): Response | void {
-  executeQuery(`SELECT Valor_ventas_in_range(?, ?);`, function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery(`SELECT Valor_ventas_in_range(?, ?) AS resultado;`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
@@ -35,7 +35,7 @@ export function getCostSalesInterval(req: Request, res: Response): Response | vo
 }
 
 export function getCostEffectiveness(req: Request, res: Response): Response | void {
-  executeQuery(`SELECT Rentabiliades(?, ?);`, function(err: QueryError | null, rows: RowDataPacket[]) {
+  executeQuery(`SELECT Rentabiliades(?, ?) AS resultado;`, function(err: QueryError | null, rows: RowDataPacket[]) {
     if (!err) {
       res.status(200)
       return res.json(rows)
