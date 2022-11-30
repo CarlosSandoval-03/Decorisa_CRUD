@@ -17,8 +17,9 @@ function Navbar() {
     <>
     <IconContext.Provider value={{color:'Black'}}>
       <div className='navbar'>
-        <div className='menu-bars'>
-          <iconBar.FaBars onClick={stateSideBar}/>
+        <div className='menu-bars flex flex-wrap '>
+          <iconBar.FaBars onClick={stateSideBar} className='mr-10'/>
+          
         </div>
           
 

@@ -395,7 +395,7 @@ function Cita() {
             {allCitas.map((item, index) => {
               if(item.cli_documento==idCita[0].cli_documento && item.ase_documento==idCita[0].ase_documento &&  item.cit_fecha==idCita[0].cit_fecha && showEditarCita==true ){
                 return(
-                  <div className='form-editar-cita'>
+                  <div key={index} className='form-editar-cita'>
                     <aiIcon.AiFillCloseCircle onClick={() => setShowEditarCita(false)} className='button-cerrar' />
                     <Formik
                   initialValues={{

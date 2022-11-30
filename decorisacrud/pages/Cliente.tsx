@@ -46,13 +46,24 @@ function Cliente() {
 
 
     const buscarClientes = async (values: Cliente) => {
-        //pasar el parametro y busque a ese cliente
-        // buscar los datos la base de datos
+        setIsLoading(true)
+        let  url:string='https://decorisaserver.azurewebsites.net/api/cliente/atributo/cli_nombreCompleto/'+values.cli_nombreCompleto
+        fetch(url, {
+
+        })
+            .then(response => response.json()).then(data => {
+                console.log('aqui toy')
+                console.log(data)
+                setClientes(data)
+                setIsLoading(false)
+
+            })
 
 
     }
     const allClientes = () => {
         // traer todos los clientes
+
         setIsLoading(true)
         fetch('https://decorisaserver.azurewebsites.net/api/cliente', {
 
@@ -60,6 +71,7 @@ function Cliente() {
             .then(response => response.json()).then(data => {
                 console.log(data)
                 setClientes(data)
+                setIsLoading(false)
 
             })
 

@@ -5,63 +5,7 @@ import * as iconMenu from 'react-icons/ai';
 import * as ioIcon from 'react-icons/io';
 import { IconContext } from 'react-icons';
 
-const rowData = [
-  {
-    ped_id: 1212312,
-    pro_nombreEmpresa: 'Panorama',
-    ped_fechaEnvio: '2022/08/09',
-    ped_fechaEntrega: '',
-    suc_direccion: 'cr52a #134a-53',
-    ped_metodoPago: 'Efectivo',
-    ped_costoPed: 1000000,
-    ven_id: 2323233
 
-  },
-  {
-    ped_id: 1212312,
-    pro_nombreEmpresa: 'Panorama',
-    ped_fechaEnvio: '2022/08/09',
-    ped_fechaEntrega: '',
-    suc_direccion: 'cr52a #134a-53',
-    ped_metodoPago: 'Efectivo',
-    ped_costoPed: 1000000,
-    ven_id: 2212323
-  },
-  {
-    ped_id: 1212312,
-    pro_nombreEmpresa: 'Panorama',
-    ped_fechaEnvio: '2022/08/09',
-    ped_fechaEntrega: '',
-    suc_direccion: 'cr52a #134a-53',
-    ped_metodoPago: 'Efectivo',
-    ped_costoPed: 1000000,
-    ven_id: 3334
-  },
-
-]
-const ProductosVenta = [
-  {
-    pro_nombreId: 'Sheer Screen',
-    productor_pro_nombreEmpresa: 'Panorama',
-    vip_prod_ancho: 1.76,
-    vip_prod_alto: 2.00,
-    vip_cantidad: 3,
-  },
-  {
-    pro_nombreId: 'Sheer Screen',
-    productor_pro_nombreEmpresa: 'Panorama',
-    vip_prod_ancho: 1.76,
-    vip_prod_alto: 2.00,
-    vip_cantidad: 3,
-  },
-  {
-    pro_nombreId: 'Sheer Screen',
-    productor_pro_nombreEmpresa: 'Panorama',
-    vip_prod_ancho: 1.76,
-    vip_prod_alto: 2.00,
-    vip_cantidad: 3,
-  },
-]
 
 function Pedido() {
   const [showFormCrearPedido, setShowFormCrearPedido] = useState(false)
@@ -88,6 +32,33 @@ function Pedido() {
     ven_fecha: '',
     ins_nombreCompleto: '',
     ven_precio: 0,
+  }])
+  const [Pedidos, setrPedidos] = useState([{
+    ped_id: 0,
+    pro_nombreEmpresa: '',
+    ped_fechaEnvio: '',
+    ped_fechaEntrega: '',
+    suc_direccion: '',
+    ped_metodoPago: '',
+    ven_id: 0,
+    ped_costoPed: 0,
+  }])
+  const [detalleVentas, setDetalleVentas] = useState([{
+    ven_id: '',
+    cli_nombreCompleto: '',
+    ase_nombreCompleto: 0,
+    ven_fecha: '',
+    ins_nombreCompleto: '',
+    ven_precio: 0,
+  }])
+
+  const [productosVenta, setProductosVenta] = useState([{
+    ven_id: 0,
+    pro_nombreId: '',
+    productor_pro_nombreEmpresa: '',
+    vip_prod_ancho: 0,
+    vip_prod_alto: 0,
+    vip_cantidad: 0,
   }])
   interface initial {
 
@@ -144,24 +115,58 @@ function Pedido() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body:JSON.stringify(values)
+      body: JSON.stringify(values)
 
     })
       .then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response))
       .then(() => {
-        
-        
+
+
         setShowFormCrearPedido(false)
         setIsLoading(false)
       })
 
-    
+
   }
   const statePedidoDetalles = (id: number): any => {
-    setIdVenta(id);
-    setShowDetallesPedido(true);
+
+    setIsLoading(true)
+
+    // busca trae las sucursales
+    let src: string = 'https://decorisaserver.azurewebsites.net/api/procedimientos/detalle_venta/'+ id
+    console.log(src)
+    fetch(src, {
+
+    })
+      .then(response => response.json()).then(data => {
+        console.log('ventas')
+        console.log(data[0])
+        setDetalleVentas(data[0])
+
+        console.log('bbbb')
+        console.log(detalleVentas[0])
+      })
+
+
+      
+    let src2: string = 'https://decorisaserver.azurewebsites.net/api/procedimientos/productos_venta/' + id
+    fetch(src2, {
+
+    })
+      .then(response => response.json()).then(data => {
+        console.log('Productos')
+        console.log(data[0])
+
+        setProductosVenta(data[0])
+
+        console.log('bbbb')
+        console.log(productosVenta)
+        setShowDetallesPedido(true);
+        setIsLoading(false)
+      })
+
 
   }
   const borrarPedido = (id: number): any => {
@@ -171,9 +176,24 @@ function Pedido() {
 
   }
   const filtrarPedidos = async (values: Fechas) => {
+    console.log('entre1')
+    if (values.Pendiente.toString() == 'true') {
+      console.log('entre2')
+      setIsLoading(true)
+      fetch('https://decorisaserver.azurewebsites.net/api/vistas/pedidos_pendientes')
+        .then(response => response.json())
+        .then(data => {
+
+          setrPedidos(data)
+          setIsLoading(false)
+
+        })
+
+    } else {
+
+
+    }
     console.log(values.ped_mes)
-
-
     console.log(values.Pendiente)
 
     //enviar fechas
@@ -301,7 +321,7 @@ function Pedido() {
                         </div>
                       </div>
                       <div className='col-start-2'>
-                      <div className="flex flex-nowrap items-center">
+                        <div className="flex flex-nowrap items-center">
                           <label className="">Empresa:</label>
                           <select
                             name="pro_nombreEmpresa" placeholder="Nombre del cliente" className=""
@@ -329,7 +349,7 @@ function Pedido() {
                             })}
                           </select>
                         </div>
-                        
+
                         <div className="flex flex-nowrap items-center ">
                           <label className="">Costo Pedido:</label>
                           <input name="ped_costoPed" type="number" placeholder="" className=""
@@ -370,12 +390,12 @@ function Pedido() {
               <iconMenu.AiFillCloseCircle onClick={() => setShowDetallesPedido(false)} className='btn' />
               <div >
                 <h1 >ID VENTA:{idVenta}</h1>
-                <h2>Precio</h2>
+                <h2>Precio: {detalleVentas[0].ven_precio}</h2>
               </div>
 
-              <h2>Cliente: pepito</h2>
-              <h2>Fecha:323</h2>
-              <h2>Instalador:jose</h2>
+              <h2>Cliente:{detalleVentas[0].cli_nombreCompleto}</h2>
+              <h2>Fecha:{detalleVentas[0].ven_fecha}</h2>
+              <h2>Instalador:{detalleVentas[0].ins_nombreCompleto}</h2>
               <h2>Productos:</h2>
               <table>
                 <tbody>
@@ -390,7 +410,7 @@ function Pedido() {
                   </tr>
 
 
-                  {ProductosVenta.map((item, index) => {
+                  {productosVenta.map((item, index) => {
                     return (
                       <><tr key={index} className={colorFondo(index)}>
                         <td >{item.pro_nombreId}</td>
@@ -483,7 +503,7 @@ function Pedido() {
                   <th>costo</th>
                   <th>Venta</th>
                 </tr>
-                {rowData.map((item, index) => {
+                {Pedidos.map((item, index) => {
                   return (
                     <>
                       <tr key={index} className={colorFondo(index)} >

@@ -243,7 +243,15 @@ select{
   
 
 }
-
+.circuloRent{
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  margin: 15px, 15px, 15px,15px;
+  padding: 5px, 5px, 5px 5px;
+  background-color: #FFD2A8;
+  
+}
 
 .button-detalles{
   background-color:#FFC29F;

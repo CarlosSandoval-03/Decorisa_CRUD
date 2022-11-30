@@ -6,6 +6,7 @@ import * as mdIcons from 'react-icons/md';
 import * as biIcons from 'react-icons/bi';
 import * as bsIcons from 'react-icons/bs';
 import * as riIcons from 'react-icons/ri';
+import * as tbIcons from 'react-icons/tb';
 
 export const SidebarData =[
     {
@@ -53,7 +54,7 @@ export const SidebarData =[
     {
         title:'Productores',
         path:'/Productor',
-        icon: <riIcons.RiPriceTag2Fill/>,
+        icon: <tbIcons.TbBuildingFactory2/>,
         cName:'nav-text'
     }
 
